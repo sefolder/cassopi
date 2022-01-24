@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "../settings/store";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
+import Head from "next/head";
 
 const Container = styled.div`
   width: 100%;
@@ -21,6 +22,7 @@ const Center = styled.div`
   width: 1080px;
   height: max-content;
   margin: 0 auto;
+  padding: 20px 10px;
 `;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -34,6 +36,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Content>
         </Container>
       </Provider>
+      <style jsx global>{`
+        html,
+        body {
+          font-family: "Noto Sans KR", sans-serif;
+        }
+      `}</style>
     </ThemeProvider>
   );
 }
