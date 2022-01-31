@@ -27,10 +27,10 @@
 /frontend/.env.development.local
 /frontend/.env.test.local
 /frontend/.env.production.local
+/frontend/.env
 
 # vercel
 /frontend/.vercel
 
 # typescript
 /frontend/*.tsbuildinfo
-

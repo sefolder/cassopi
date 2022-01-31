@@ -185,7 +185,7 @@ const NavBar = () => {
   };
 
   const onLoginClick = () => {
-    router.push("/profile");
+    router.push("/login");
   };
 
   return (
