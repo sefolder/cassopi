@@ -2,10 +2,14 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
-  <Layout>
-    <Component {...pageProps} />
-  </Layout>
-);
+import { wrapper } from "../store"; //redux
 
-export default MyApp;
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
+};
+
+export default wrapper.withRedux(MyApp);
