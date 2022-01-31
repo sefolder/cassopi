@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { store } from "../settings/store";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
-import Head from "next/head";
 
 const Container = styled.div`
   width: 100%;

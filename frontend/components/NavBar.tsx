@@ -140,6 +140,33 @@ const NavBtn = styled.a<{ isCurrent: boolean }>`
   }
 `;
 
+const LoginBtn = styled.button<{ isLogin: boolean }>`
+  border-radius: 4px;
+  border: none;
+  background-color: ${(props) => props.theme.klipColor};
+  height: 40px;
+  width: 150px;
+  transition: opacity 0.1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    opacity: 90%;
+  }
+
+  svg {
+    height: 12px;
+    margin-right: 5px;
+  }
+  span {
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: "Noto Sans KR", sans-serif;
+  }
+`;
+
 const NavBar = () => {
   const isLogin = useAppSelector((state) => state.isLogin);
   const userName = useAppSelector((state) => state.userName);
@@ -155,6 +182,10 @@ const NavBar = () => {
         search: searchInput.value,
       },
     });
+  };
+
+  const onLoginClick = () => {
+    router.push("/profile");
   };
 
   return (
@@ -186,23 +217,23 @@ const NavBar = () => {
           </NavList>
         </NavBarLeft>
         <NavBarRight>
-          {/* NavBar 로그인/로그아웃 Redux 사용 예시 */}
-          <button
-            onClick={() => {
-              dispatch(userActions.login({ userName: "유정민" }));
-              console.log(isLogin, userName);
-            }}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => {
-              dispatch(userActions.logout());
-              console.log(isLogin, userName);
-            }}
-          >
-            Logout
-          </button>
+          <LoginBtn isLogin={isLogin} onClick={onLoginClick}>
+            <svg
+              width="26"
+              height="14"
+              viewBox="0 0 26 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M25.3683 3.55054L25.3362 3.39516C24.9951 1.76959 23.5998 0.770813 21.6728 0.770813L17.5377 0.771106L4.34028 0.771252C2.41327 0.771252 1.00439 1.78116 0.663287 3.40673L0.631207 3.56211C0.570137 3.91652 0.539676 4.2696 0.541589 4.70031V9.25001C0.543943 9.81559 0.601628 10.2196 0.602217 10.2236L0.604572 10.2407C0.831781 12.1119 2.22815 13.2291 4.34028 13.2291H16.1484H16.1859H16.8686C16.869 13.2291 16.8693 13.2289 16.8696 13.2289C16.8697 13.2289 16.87 13.229 16.8702 13.229C16.9795 13.229 17.0681 13.1408 17.0681 13.0322C17.0681 13.032 17.068 13.0319 17.068 13.0317C17.068 13.0313 17.0683 13.0309 17.0683 13.0303V5.66393C17.0683 5.66335 17.068 5.66291 17.068 5.66232C17.068 5.66218 17.0681 5.66218 17.0681 5.66203C17.0681 5.55337 16.9795 5.46506 16.8702 5.46506C16.8699 5.46506 16.8696 5.46535 16.8693 5.46535C16.869 5.46535 16.8689 5.4652 16.8686 5.4652H16.1484C16.1481 5.4652 16.1479 5.46535 16.1477 5.46535C16.1472 5.46535 16.1466 5.46506 16.1462 5.46506C16.0368 5.46506 15.9483 5.55322 15.9483 5.66188C15.9483 5.66247 15.9485 5.66291 15.9485 5.6635C15.9485 5.66364 15.9485 5.66379 15.9485 5.66393V12.1204H4.62002C2.74408 12.1204 1.66719 10.9813 1.66586 9.2894L1.66704 4.68976C1.66704 2.9832 2.74319 1.88338 4.62002 1.88338L19.5776 1.88323L21.3941 1.88338C23.2709 1.88338 24.3345 2.97163 24.3345 4.67834L24.3357 9.27769C24.3342 10.9697 23.2688 12.1145 21.393 12.1145L21.0091 12.1198C20.8502 12.1208 20.7118 12.1217 20.5514 12.1224C20.5514 12.1224 20.3365 12.1223 20.336 12.1223C20.2268 12.1223 20.1382 12.2105 20.1382 12.3191C20.1382 12.3199 20.1378 12.3204 20.1378 12.3212V13.0276C20.1378 13.0278 20.1379 13.0279 20.1379 13.0281C20.1379 13.0287 20.1376 13.029 20.1376 13.0294C20.1376 13.1381 20.2262 13.2262 20.3356 13.2262C20.3357 13.2262 20.4793 13.2264 20.4793 13.2264L20.8384 13.2255C20.9061 13.2249 20.9741 13.2243 21.0416 13.2233H21.6728C23.7849 13.2233 25.1677 12.1005 25.3949 10.2292L25.3973 10.212C25.3979 10.2081 25.4556 9.80402 25.4579 9.23844V4.68874C25.4598 4.25803 25.4294 3.90495 25.3683 3.55054Z"
+                fill="white"
+              />
+            </svg>
+            <span>Klip으로 로그인</span>
+          </LoginBtn>
         </NavBarRight>
       </InnerContainer>
     </Container>
