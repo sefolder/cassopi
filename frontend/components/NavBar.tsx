@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
-import { userActions } from "../settings/store";
+//import { userActions } from "../settings/store";
 
 import searchIcon from "../assets/search.svg";
 import Image from "next/image";
@@ -168,8 +168,9 @@ const LoginBtn = styled.button<{ isLogin: boolean }>`
 `;
 
 const NavBar = () => {
-  const isLogin = useAppSelector((state) => state.isLogin);
-  const userName = useAppSelector((state) => state.userName);
+  const isLogin = useAppSelector((state) => state.user.isLogin);
+  const userAddress = useAppSelector((state) => state.user.userAddress);
+  //const userName = useAppSelector((state) => state.user.userName);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const searchInput = useInput("");
