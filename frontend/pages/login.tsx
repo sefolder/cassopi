@@ -5,6 +5,7 @@ import QRCode from "qrcode.react";
 import { getAddress } from "../api/useKlip";
 import { getBalance } from "../api/useCaver";
 
+
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = "0x0000000000000000000000000000000000000000";
 
