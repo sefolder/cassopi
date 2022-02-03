@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Title from "../components/Title";
+import Title from "../../components/Title";
 
 const Market: NextPage = () => {
   return (
