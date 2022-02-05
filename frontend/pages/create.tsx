@@ -6,17 +6,6 @@ import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import * as KlipAPI from "../api/useKlip";
 import styled from "styled-components";
 
-const InnerContainer = styled.div`
-  width: 1080px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 10px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const Bigtxt = styled.div`
   font-size: 40px;
   font-weight: bold;
