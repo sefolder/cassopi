@@ -10,7 +10,7 @@ export interface User {
 
 const userInitialState = { 
   isLogin: false, 
-  //userName: "",
+  userName: "undefined",
   userAddress: "0x0000000000" //kakao klip address
 };
 
@@ -22,15 +22,19 @@ export const userSlice = createSlice({
     login: (state, action: PayloadAction<User>) => {
       const { isLogin, userAddress } = action.payload;
       state.isLogin = true;
-      // state.userName = action.payload.userName;
+      //state.userName = 백엔드에서 address별로 저장된 닉네임 가져오기
       state.userAddress = action.payload.userAddress;
       console.log("user logged in, address is ", state.userAddress);
     },
     logout: (state) => {
       state.isLogin = false;
-      //state.userName = "";
+      state.userName = "undefined";
       state.userAddress = "0x0000000000";
     },
+    /* 새로 닉네임 생성 시 userName에 닉네임 추가
+    setusername: (state) => {
+      //백엔드에서 닉네임 가져오기
+    }*/
   },
 });
 
