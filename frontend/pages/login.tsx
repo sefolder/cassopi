@@ -5,7 +5,7 @@ import QRCode from "qrcode.react";
 import { getAddress } from "../api/useKlip";
 import { getBalance } from "../api/useCaver";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
-import { User, login, logout } from "../settings/slices/user";
+import { User, login, logout, setUserBalance } from "../settings/slices/user";
 
 
 const DEFAULT_QR_CODE = "DEFAULT";
@@ -21,7 +21,14 @@ const Profile: NextPage = () => {
 
   const isLogin = useAppSelector((state) => state.user.isLogin);
   const userAddress = useAppSelector((state) => state.user.userAddress);
+  const userBalance = useAppSelector((state) => state.user.userBalance);
   const dispatch = useAppDispatch();
+
+  const checkBalance = async() => {
+    let _balance = await getBalance(userAddress);
+    setBalance(_balance);
+    dispatch(setUserBalance(_balance));
+  }
 
   return (
     <>
@@ -29,8 +36,9 @@ const Profile: NextPage = () => {
 
       {isLogin ? (
         <>
-          <h1>Address: {address}</h1>
-          <h1>Balance: {balance} klay</h1>
+          <h1>Address: {userAddress}</h1>
+          <h1>Balance: {userBalance} klay <button onClick={checkBalance}> 새로고침 </button></h1>
+          
           <br/>
           <button
             onClick={ () => {
@@ -64,8 +72,10 @@ const Profile: NextPage = () => {
                     isLogin: true,
                     userAddress: address
                   }
-                  dispatch(login(_user as User))
-                  setBalance(await getBalance(address))
+                  dispatch(login(_user as User));
+                  let _balance = (await getBalance(address));
+                  setBalance (_balance);
+                  dispatch(setUserBalance(_balance));
                 })
               }
             }

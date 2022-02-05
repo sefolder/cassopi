@@ -11,7 +11,8 @@ export interface User {
 const userInitialState = { 
   isLogin: false, 
   userName: "undefined",
-  userAddress: "0x0000000000" //kakao klip address
+  userAddress: "0x0000000000", //kakao klip address
+  userBalance: "0" //klaytn token (coin)
 };
 
 // slice -> provides reducers and action creators
@@ -30,7 +31,11 @@ export const userSlice = createSlice({
       state.isLogin = false;
       state.userName = "undefined";
       state.userAddress = "0x0000000000";
+      state.userBalance = "0";
     },
+    setUserBalance: (state, action: PayloadAction<string>) => {
+      state.userBalance = action.payload;
+    }
     /* 새로 닉네임 생성 시 userName에 닉네임 추가
     setusername: (state) => {
       //백엔드에서 닉네임 가져오기
@@ -45,6 +50,6 @@ export const userSlice = createSlice({
 //export const { login, logout } = user.actions;
 //export default user.reducer;
 const { actions, reducer } = userSlice;
-export const { login, logout } = actions;
+export const { login, logout, setUserBalance } = actions;
 
 export default reducer;
