@@ -1,4 +1,5 @@
 import Caver from "caver-js";
+import KIP17ABI from "../abi/KIP17TokenABI.json";
 
 const ACCESS_KEY_ID = process.env.NEXT_PUBLIC_ACCESS_KEY_ID;
 const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY;
@@ -31,4 +32,34 @@ export const getBalance = (address: string) => {
     console.log("Balance(KLAY)", balance);
     return balance;
   });
+};
+
+const NFTContract = new caver.contract(KIP17ABI, process.env.NEXT_PUBLIC_BETA_CONTRACT);
+
+export const fetchCardsOf = async (address: string) => {
+  // fetch balance
+  const balance = await NFTContract.methods.balanceOf(address).call();
+  console.log("Balance", balance);
+
+  // fetch token IDs
+  const tokenIds = [];
+  for (let i = 0; i < balance; i++) {
+    const id = await NFTContract.methods.tokenOfOwnerByIndex(address, i).call();
+    tokenIds.push(id);
+  }
+
+  // fetch token URIs
+  const tokenUris = [];
+  for (let i = 0; i < balance; i++) {
+    const id = await NFTContract.methods.tokenURI(tokenIds[i]).call();
+    tokenUris.push(id);
+  }
+
+  const nfts = [];
+  for (let i = 0; i < balance; i++) {
+    nfts.push({ uri: tokenUris[i], id: tokenIds[i] });
+  }
+  console.log("nft", nfts);
+
+  return nfts;
 };
