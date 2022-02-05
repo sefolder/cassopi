@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Title from "../components/Title";
+import QRCode from "qrcode.react";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import * as KlipAPI from "../api/useKlip";
@@ -90,6 +91,18 @@ const Create: NextPage = () => {
       <h1>Create</h1>
       {isLogin ? (
         <>
+          {qrvalue !== "DEFAULT" ? (
+            <div
+              style={{
+                backgroundColor: "white",
+                width: 300,
+                height: 300,
+                padding: 20,
+              }}
+            >
+              <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
+            </div>
+          ) : null}
           <h1>Address: {userAddress}</h1> <br />
           <br />
           <br />
