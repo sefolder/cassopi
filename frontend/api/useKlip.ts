@@ -32,7 +32,7 @@ export const displayCard = async (
   );
 };
 
-export const MintCardWithURI = async (
+export const mintCardWithURI = async (
   toAddress: string,
   tokenId: string,
   uri: string,
