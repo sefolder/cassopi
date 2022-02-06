@@ -3,7 +3,11 @@ import axios from "axios";
 const A2A_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "cassoPi";
 
-export const buyCard = async (tokenId: string, setQrvalue: (arg0: string) => void, callback: (arg0: any) => void) => {
+export const buyCard = async (
+  tokenId: number,
+  setQrvalue: (arg0: string) => void,
+  callback: (arg0: any) => void
+) => {
   const functionJson = `{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" }, { "name": "NFTAddress", "type": "address" } ], "name": "buyNFT", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }`;
   executeContract(
     process.env.NEXT_PUBLIC_BETA_CONTRACT,
@@ -17,7 +21,7 @@ export const buyCard = async (tokenId: string, setQrvalue: (arg0: string) => voi
 
 export const displayCard = async (
   fromAddress: string,
-  tokenId: string,
+  tokenId: number,
   setQrvalue: (arg0: string) => void,
   callback: (arg0: any) => void
 ) => {
@@ -34,7 +38,7 @@ export const displayCard = async (
 
 export const mintCardWithURI = async (
   toAddress: string,
-  tokenId: string,
+  tokenId: number,
   uri: string,
   setQrvalue: (arg0: string) => void,
   callback: (arg0: any) => void
@@ -122,5 +126,6 @@ export const executeContract = (
             }
           });
       }, 1000);
-    });
+    })
+    .catch((e) => console.log(`execute contract error ${e}`));
 };
