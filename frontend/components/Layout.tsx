@@ -1,9 +1,11 @@
 import React from "react";
 import NavBar from "./NavBar";
-import { Provider } from "react-redux";
-import { store } from "../settings/store";
 import styled, { ThemeProvider } from "styled-components";
 import { theme } from "../styles/theme";
+import { useCookies } from "react-cookie";
+import { useEffect } from "react";
+import { useAppDispatch } from "../settings/hooks";
+import { login } from "../settings/slices/user";
 
 const Container = styled.div`
   width: 100%;
@@ -25,16 +27,24 @@ const Center = styled.div`
 `;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const [cookies] = useCookies(["userAddress"]);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (cookies.userAddress) {
+      dispatch(login({ userAddress: cookies.userAddress }));
+    }
+  }, [cookies]);
+
   return (
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <Container>
-          <NavBar />
-          <Content>
-            <Center>{children}</Center>
-          </Content>
-        </Container>
-      </Provider>
+      <Container>
+        <NavBar />
+        <Content>
+          <Center>{children}</Center>
+        </Content>
+      </Container>
+
       <style jsx global>{`
         html,
         body {

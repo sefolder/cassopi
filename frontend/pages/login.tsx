@@ -6,7 +6,7 @@ import { getAddress } from "../api/useKlip";
 import { getBalance } from "../api/useCaver";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import { User, login, logout, setUserBalance } from "../settings/slices/user";
-
+import { useCookies } from "react-cookie";
 
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = "0x0000000000000000000000000000000000000000";
@@ -18,17 +18,18 @@ const Profile: NextPage = () => {
   //console.log("key", process.env.NEXT_PUBLIC_ACCESS_KEY_ID);
   const [qrOn, setQrOn] = useState(false);
   const [balance, setBalance] = useState(DEFAULT_BALANCE);
+  const [_, setCookie] = useCookies(["userAddress"]);
 
   const isLogin = useAppSelector((state) => state.user.isLogin);
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
   const dispatch = useAppDispatch();
 
-  const checkBalance = async() => {
+  const checkBalance = async () => {
     let _balance = await getBalance(userAddress);
     setBalance(_balance);
     dispatch(setUserBalance(_balance));
-  }
+  };
 
   return (
     <>
@@ -37,13 +38,16 @@ const Profile: NextPage = () => {
       {isLogin ? (
         <>
           <h1>Address: {userAddress}</h1>
-          <h1>Balance: {userBalance} klay <button onClick={checkBalance}> 새로고침 </button></h1>
-          
-          <br/>
+          <h1>
+            Balance: {userBalance} klay{" "}
+            <button onClick={checkBalance}> 새로고침 </button>
+          </h1>
+
+          <br />
           <button
-            onClick={ () => {
+            onClick={() => {
               setQrOn(false);
-              dispatch(logout())
+              dispatch(logout());
               setQrvalue(DEFAULT_QR_CODE);
               setAddress(DEFAULT_ADDRESS);
               setBalance(DEFAULT_BALANCE);
@@ -59,32 +63,28 @@ const Profile: NextPage = () => {
               <h1>Address: {address}</h1>
               <QRCode value={qrvalue} />
             </>
-          ) : null }
-          <br/>
-          <br/>
+          ) : null}
+          <br />
+          <br />
           <button
-            onClick={ async () =>
-              {
-                setQrOn(true);
-                getAddress(setQrvalue, async (address) => {
-                  setAddress(address);
-                  const _user = {
-                    isLogin: true,
-                    userAddress: address
-                  }
-                  dispatch(login(_user as User));
-                  let _balance = (await getBalance(address));
-                  setBalance (_balance);
-                  dispatch(setUserBalance(_balance));
-                })
-              }
-            }
+            onClick={async () => {
+              setQrOn(true);
+              getAddress(setQrvalue, async (address) => {
+                setAddress(address);
+                const _user = {
+                  userAddress: address,
+                };
+                dispatch(login(_user as User));
+                let _balance = await getBalance(address);
+                setBalance(_balance);
+                dispatch(setUserBalance(_balance));
+              });
+            }}
           >
-          {qrOn ? (<>로그인 QR 코드 다시 받기</>) : (<>로그인 QR 코드 받기</>) }
+            {qrOn ? <>로그인 QR 코드 다시 받기</> : <>로그인 QR 코드 받기</>}
           </button>
         </>
       )}
-      
     </>
   );
 };
