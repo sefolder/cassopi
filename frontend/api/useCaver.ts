@@ -34,9 +34,12 @@ export const getBalance = (address: string) => {
   });
 };
 
-const NFTContract = new caver.contract(KIP17ABI, process.env.NEXT_PUBLIC_BETA_CONTRACT);
+const NFTContract = new caver.contract(
+  KIP17ABI,
+  process.env.NEXT_PUBLIC_BETA_CONTRACT
+);
 
-export const fetchCardsOf = async (address: string) => {
+export const fetchCardsOf = async (address: any) => {
   // fetch balance
   const balance = await NFTContract.methods.balanceOf(address).call();
   console.log("Balance", balance);

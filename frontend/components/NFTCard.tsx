@@ -4,17 +4,27 @@ import styled from "styled-components";
 const Container = styled.div`
   border-radius: 5px;
   padding: 10px;
-  border: 1px solid gray;
   width: 25%;
 `;
 
-const NFTCard = ({ artId, price }: { artId: number; price: number }) => (
+const NFTCard = ({
+  artId,
+  uri,
+  price,
+}: {
+  artId: number;
+  uri: string;
+  price: number;
+}) => (
   <Container>
     <Link href={`/market/${artId}`}>
-      <a>{artId}NFT</a>
+      <a>
+        <img src={uri} />
+        NFTID[{artId}]
+        <br />
+        {price}KLAY
+      </a>
     </Link>
-    <br />
-    {price}KLAY
   </Container>
 );
 

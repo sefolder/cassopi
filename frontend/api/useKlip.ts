@@ -5,15 +5,16 @@ const APP_NAME = "cassoPi";
 
 export const buyCard = async (
   tokenId: number,
+  price: number,
   setQrvalue: (arg0: string) => void,
   callback: (arg0: any) => void
 ) => {
-  const functionJson = `{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" }, { "name": "NFTAddress", "type": "address" } ], "name": "buyNFT", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }`;
+  const functionJson = `{ "constant": false, "inputs": [ { "name": "tokenId", "type": "uint256" }, { "name": "price", "type": "uint256" }, { "name": "NFTAddress", "type": "address" } ], "name": "buyNFT", "outputs": [ { "name": "", "type": "bool" } ], "payable": true, "stateMutability": "payable", "type": "function" }`;
   executeContract(
-    process.env.NEXT_PUBLIC_BETA_CONTRACT,
+    process.env.NEXT_PUBLIC_MARKET_CONTRACT,
     functionJson,
     "10000000000000000",
-    `[\"${tokenId}\",\"${process.env.NEXT_PUBLIC_BETA_CONTRACT}\"]`,
+    `[\"${tokenId}\",\"${price}\",\"${process.env.NEXT_PUBLIC_BETA_CONTRACT}\"]`,
     setQrvalue,
     callback
   );
@@ -30,7 +31,7 @@ export const displayCard = async (
     process.env.NEXT_PUBLIC_BETA_CONTRACT,
     functionJson,
     "0",
-    `[\"${fromAddress}\",\"${process.env.NEXT_PUBLIC_BETA_CONTRACT}\",\"${tokenId}\"]`,
+    `[\"${fromAddress}\",\"${process.env.NEXT_PUBLIC_MARKET_CONTRACT}\",\"${tokenId}\"]`,
     setQrvalue,
     callback
   );
@@ -123,9 +124,9 @@ export const executeContract = (
               );
               callback(res.data.result);
               clearInterval(timerId);
+              setQrvalue("DEFAULT");
             }
           });
       }, 1000);
-    })
-    .catch((e) => console.log(`execute contract error ${e}`));
+    });
 };
