@@ -113,7 +113,12 @@ const Create: NextPage = () => {
             {mintImageUrl !== "" ? (
               <img src={mintImageUrl} height={"50%"} />
             ) : null}
-            <form>
+            <form
+              onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+                event.preventDefault();
+                onClickMint(mintImageUrl);
+              }}
+            >
               <div
                 style={{ alignItems: "center", width: "90%", margin: "0 auto" }}
               >
@@ -129,13 +134,7 @@ const Create: NextPage = () => {
                 />
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
-                <CardButton
-                  onClick={() => {
-                    onClickMint(mintImageUrl);
-                  }}
-                >
-                  발행하기
-                </CardButton>
+                <CardButton>발행하기</CardButton>
               </div>
             </form>
           </Card>
