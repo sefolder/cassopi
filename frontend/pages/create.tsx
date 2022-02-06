@@ -43,7 +43,7 @@ const CardButton = styled.button`
     background-color: white;
     color: skyblue;
   }
-`
+`;
 
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = "0x0000000000000000000000000000000000000000";
@@ -113,8 +113,15 @@ const Create: NextPage = () => {
             {mintImageUrl !== "" ? (
               <img src={mintImageUrl} height={"50%"} />
             ) : null}
-            <form>
-              <div style={{alignItems: "center", width: "90%", margin: "0 auto"}}>
+            <form
+              onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+                event.preventDefault();
+                onClickMint(mintImageUrl);
+              }}
+            >
+              <div
+                style={{ alignItems: "center", width: "90%", margin: "0 auto" }}
+              >
                 <input
                   value={mintImageUrl}
                   onChange={(e) => {
@@ -123,17 +130,11 @@ const Create: NextPage = () => {
                   }}
                   type="text"
                   placeholder="이미지 주소를 입력해주세요"
-                  style={{alignItems: "center", width: "100%"}}
+                  style={{ alignItems: "center", width: "100%" }}
                 />
               </div>
-              <div style={{display: "flex", alignItems: "center"}}>
-                <CardButton
-                  onClick={() => {
-                    onClickMint(mintImageUrl);
-                  }}
-                >
-                  발행하기
-                </CardButton>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <CardButton>발행하기</CardButton>
               </div>
             </form>
           </Card>
