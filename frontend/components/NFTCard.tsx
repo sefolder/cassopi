@@ -20,7 +20,13 @@ const NFTCard = ({
   <Container>
     <Link href={`/market/${artId}`}>
       <a>
-        <Image src={uri} />
+        <Image
+          src={uri}
+          alt="artId"
+          width={200}
+          height={200}
+          objectFit="cover"
+        />
         NFTID[{artId}]
         <br />
         {price}KLAY

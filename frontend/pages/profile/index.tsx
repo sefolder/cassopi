@@ -75,7 +75,7 @@ const UserCollection: NextPage = () => {
         title={`NFT #${nftInfo.id}`}
       >
         <ModalBody>
-          <Image src={nftInfo.uri} />
+          <Image src={nftInfo.uri} alt="nft" />
           <br />
           <Button onClick={onConfirm}>마켓에 올리기</Button>
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}

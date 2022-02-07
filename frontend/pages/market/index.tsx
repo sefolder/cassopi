@@ -25,14 +25,17 @@ const Market: NextPage = () => {
     <>
       <Title>Market</Title>
       <h1>Market</h1>
-      {nfts.map((nft, index) => (
-        <NFTCard
-          key={`NFT${nft.id}`}
-          artId={nft.id}
-          uri={nft.uri}
-          price={0.01}
-        ></NFTCard>
-      ))}
+      {nfts.map(
+        (nft, index) =>
+          nft.uri.length > 0 && (
+            <NFTCard
+              key={`NFT${nft.id}`}
+              artId={nft.id}
+              uri={nft.uri}
+              price={0.01}
+            ></NFTCard>
+          )
+      )}
     </>
   );
 };
