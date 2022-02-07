@@ -8,6 +8,25 @@ import Modal from "../../components/Modal";
 import Title from "../../components/Title";
 import QRCode from "qrcode.react";
 import { useAppDispatch, useAppSelector, useInput } from "../../settings/hooks";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const ModalBody = styled.div`
+  text-align: center;
+`;
+
+const Button = styled.div`
+  padding: 10px;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+`;
 
 // 로그인 된 유저의 콜렉션
 const UserCollection: NextPage = () => {
@@ -15,7 +34,10 @@ const UserCollection: NextPage = () => {
   const userAddress = "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327"; //임시 주소
 
   const [modal, setModal] = useState(false);
-  const [nftId, setNftId] = useState(0);
+  const [nftInfo, setNftInfo] = useState({
+    id: 0,
+    uri: "",
+  });
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const priceInput = useInput(0);
 
@@ -32,7 +54,7 @@ const UserCollection: NextPage = () => {
   };
 
   const onConfirm = () => {
-    displayCard(userAddress, nftId, setQrvalue, (result) => {
+    displayCard(userAddress, nftInfo.id, setQrvalue, (result) => {
       alert(JSON.stringify(result));
     });
   };
@@ -44,28 +66,33 @@ const UserCollection: NextPage = () => {
   return (
     <>
       <Title>콜렉션</Title>
-      <h1>콜렉션</h1>
+      <h1>NFT 콜렉션</h1>
 
-      <Modal show={modal} onClose={() => setModal(false)} title="">
-        <div>
-          {/* <input type="number" placeholder="가격 입력" {...priceInput} />
-          KLAY */}
-          <button onClick={onConfirm}>마켓에 올리기</button>
+      <Modal
+        show={modal}
+        onClose={() => setModal(false)}
+        title={`NFT #${nftInfo.id}`}
+      >
+        <ModalBody>
+          <img src={nftInfo.uri} />
+          <br />
+          <Button onClick={onConfirm}>마켓에 올리기</Button>
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
-        </div>
+        </ModalBody>
       </Modal>
-
-      {nfts.map((nft, index) => (
-        <CollectionCard
-          key={`nft${nft.id}`}
-          artId={nft.id}
-          uri={nft.uri}
-          onClick={() => {
-            setModal(true);
-            setNftId(nft.id);
-          }}
-        ></CollectionCard>
-      ))}
+      <Container>
+        {nfts.map((nft, index) => (
+          <CollectionCard
+            key={`nft${nft.id}`}
+            nftInfo={nft}
+            onClick={() => {
+              setModal(true);
+              setNftInfo(nft);
+              setQrvalue("DEFAULT");
+            }}
+          ></CollectionCard>
+        ))}
+      </Container>
     </>
   );
 };
