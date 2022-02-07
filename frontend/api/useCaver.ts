@@ -1,4 +1,5 @@
 import Caver from "caver-js";
+import { AbiItem } from "caver-js/types/packages/caver-utils/src";
 import KIP17ABI from "../abi/KIP17TokenABI.json";
 
 const ACCESS_KEY_ID = process.env.NEXT_PUBLIC_ACCESS_KEY_ID;
@@ -26,7 +27,7 @@ const caver = new Caver(
 
 export const getBalance = (address: string) => {
   return caver.rpc.klay.getBalance(address).then((response: any) => {
-    const balance = caver.utils.convertFromPeb(
+    const balance = caver.utils.fromPeb(
       caver.utils.hexToNumberString(response)
     );
     console.log("Balance(KLAY)", balance);
@@ -35,7 +36,7 @@ export const getBalance = (address: string) => {
 };
 
 const NFTContract = new caver.contract(
-  KIP17ABI,
+  KIP17ABI as AbiItem[],
   process.env.NEXT_PUBLIC_BETA_CONTRACT
 );
 

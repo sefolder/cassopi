@@ -20,14 +20,15 @@ const Banner = styled.img`
 `;
 
 const Home: NextPage = () => {
-  const BannerURL = "https://image.freepik.com/free-vector/abstract-dotted-banner-background_1035-18160.jpg"; //temporary
+  const BannerURL =
+    "https://image.freepik.com/free-vector/abstract-dotted-banner-background_1035-18160.jpg"; //temporary
   const eventURL = "https://forms.gle/L5AerRzfDMzDfZfbA";
 
   return (
     <>
       <Title>홈</Title>
       <BannerContainer>
-        <a href={eventURL} target="_blank">
+        <a href={eventURL} target="_blank" rel="noreferrer">
           <Banner src={BannerURL} />
         </a>
       </BannerContainer>
