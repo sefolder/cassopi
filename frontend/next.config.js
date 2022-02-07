@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    loader: "akamai",
+    path: "",
+  },
   webpack5: true, //caver-js 오류 해결
   webpack: (config) => {
     config.resolve.fallback = {

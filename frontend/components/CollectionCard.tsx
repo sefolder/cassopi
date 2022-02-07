@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ const Container = styled.div`
   margin-left: 0;
 `;
 
-const Image = styled.img`
+const CollectionImage = styled(Image)`
   border-radius: 10px;
   width: 100%;
   height: 100%;
@@ -25,7 +26,10 @@ const CollectionCard = ({
   onClick: () => void;
 }) => (
   <Container onClick={onClick}>
-    <Image src={nftInfo.uri} alt={`NFT${nftInfo.id}`}></Image>
+    <CollectionImage
+      src={nftInfo.uri}
+      alt={`NFT${nftInfo.id}`}
+    ></CollectionImage>
   </Container>
 );
 
