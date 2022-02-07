@@ -5,8 +5,9 @@ export interface User {
   // isLogin: boolean;
   //userName: string;
   userAddress: string;
+  userBalance: string;
+  userName: string;
 }
-
 //slice 안에 들어갈 내용은 name, init, reducers
 
 const userInitialState = {
@@ -16,20 +17,26 @@ const userInitialState = {
   userBalance: "0", //klaytn token (coin)
 };
 
+const getUserInitialState = () => {
+  const cookies = new Cookies();
+  const userInfo = cookies.get("userInfo");
+
+  return userInfo ? { isLogin: true, ...userInfo } : userInitialState;
+};
+
 // slice -> provides reducers and action creators
 export const userSlice = createSlice({
   name: "user",
-  initialState: userInitialState,
+  initialState: getUserInitialState(),
   reducers: {
     login: (state, action: PayloadAction<User>) => {
-      const { userAddress } = action.payload;
       state.isLogin = true;
       //state.userName = 백엔드에서 address별로 저장된 닉네임 가져오기
-      state.userAddress = userAddress;
+      state.userAddress = action.payload.userAddress;
 
       const cookies = new Cookies();
-      if (!cookies.get("userAddress")) {
-        cookies.set("userAddress", userAddress, {
+      if (!cookies.get("userInfo")) {
+        cookies.set("userInfo", JSON.stringify(action.payload), {
           path: "/",
           maxAge: 604800, // 일주일
           sameSite: true,

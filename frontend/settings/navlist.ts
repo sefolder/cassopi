@@ -14,3 +14,9 @@ export const userNavList: INavlist[] = [
   { id: 2, pathname: "/profile/info", name: "회원정보" },
   { id: 3, pathname: "/profile/edit", name: "회원정보수정" },
 ];
+
+export const userOnlyList: string[] = [
+  "/profile",
+  "/profile/info",
+  "/profile/edit",
+];

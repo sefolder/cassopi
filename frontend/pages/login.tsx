@@ -71,13 +71,14 @@ const Profile: NextPage = () => {
               setQrOn(true);
               getAddress(setQrvalue, async (address) => {
                 setAddress(address);
-                const _user = {
-                  userAddress: address,
-                };
-                dispatch(login(_user as User));
                 let _balance = await getBalance(address);
                 setBalance(_balance);
-                dispatch(setUserBalance(_balance));
+                const _user = {
+                  userAddress: address,
+                  userBalance: _balance,
+                  userName: "홍길동",
+                };
+                dispatch(login(_user as User));
               });
             }}
           >
