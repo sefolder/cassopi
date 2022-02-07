@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import * as KlipAPI from "../api/useKlip";
 import styled from "styled-components";
+import Image from 'next/image'
 
 const Bigtxt = styled.div`
   font-size: 40px;
@@ -111,7 +112,7 @@ const Create: NextPage = () => {
           {/* 파일 업로드 */}
           <Card>
             {mintImageUrl !== "" ? (
-              <img src={mintImageUrl} height={"50%"} />
+              <Image src={mintImageUrl} alt="Image to Mint" height={"50%"} />
             ) : null}
             <form
               onSubmit={(event: React.FormEvent<HTMLFormElement>) => {

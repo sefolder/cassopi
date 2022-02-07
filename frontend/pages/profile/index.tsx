@@ -9,6 +9,7 @@ import Title from "../../components/Title";
 import QRCode from "qrcode.react";
 import { useAppDispatch, useAppSelector, useInput } from "../../settings/hooks";
 import styled from "styled-components";
+import Image from "next/image";
 
 const Container = styled.div`
   display: flex;
@@ -74,7 +75,7 @@ const UserCollection: NextPage = () => {
         title={`NFT #${nftInfo.id}`}
       >
         <ModalBody>
-          <img src={nftInfo.uri} />
+          <Image src={nftInfo.uri} />
           <br />
           <Button onClick={onConfirm}>마켓에 올리기</Button>
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}

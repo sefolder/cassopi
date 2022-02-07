@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -19,7 +20,7 @@ const NFTCard = ({
   <Container>
     <Link href={`/market/${artId}`}>
       <a>
-        <img src={uri} />
+        <Image src={uri} />
         NFTID[{artId}]
         <br />
         {price}KLAY
