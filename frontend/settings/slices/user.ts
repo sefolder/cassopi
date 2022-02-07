@@ -36,7 +36,8 @@ export const userSlice = createSlice({
 
       const cookies = new Cookies();
       if (!cookies.get("userInfo")) {
-        cookies.set("userInfo", JSON.stringify(action.payload), {
+        // react-cookie에서는 JSON.stringify()/parse()를 해줄 필요가 없음
+        cookies.set("userInfo", action.payload, {
           path: "/",
           maxAge: 604800, // 일주일
           sameSite: true,
@@ -51,7 +52,7 @@ export const userSlice = createSlice({
       state.userBalance = "0";
 
       const cookies = new Cookies();
-      cookies.remove("userAddress");
+      cookies.remove("userInfo");
     },
     setUserBalance: (state, action: PayloadAction<string>) => {
       state.userBalance = action.payload;
