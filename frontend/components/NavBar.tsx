@@ -7,7 +7,7 @@ import searchIcon from "../assets/search.svg";
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/router";
-import { navList, userNavList } from "../settings/navList";
+import { navList, userNavList } from "../settings/navlists";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../settings/slices/user";
