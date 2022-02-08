@@ -5,6 +5,45 @@ import Title from "../../components/Title";
 import * as KlipAPI from "../../api/useKlip";
 import QRCode from "qrcode.react";
 import { useAppSelector } from "../../settings/hooks";
+import styled from "styled-components";
+
+const PriceContainer = styled.div`
+  padding: 12px;
+  border: 1px solid gray;
+  display: inline-block;
+  border-radius: 5px;
+  min-width: 320px;
+  text-align: center;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5px;
+  }
+
+  button {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    border: 0;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+  }
+`;
+
+const Price = styled.div`
+  font-weight: bold;
+  font-size: 2rem;
+  color: black;
+`;
+
+const PriceLabel = styled.div`
+  color: gray;
+  height: 20px;
+`;
 
 const Art: NextPage = () => {
   const {
@@ -26,34 +65,19 @@ const Art: NextPage = () => {
       }
     );
   };
-  /*
-  
-
-  const onClickMint = async () => {
-    const randomTokenId = Math.round(Math.random() * 10000000);
-    KlipAPI.mintCardWithURI(
-      "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327",
-      1,
-      "https://cdn.pixabay.com/photo/2021/12/17/06/18/cat-6875746__340.jpg",
-      setQrvalue,
-      (result) => {
-        alert(JSON.stringify(result));
-      }
-    );
-  };
-  */
 
   return (
     <>
       <Title>{artId}</Title>
       <h1>Art {artId}</h1>
-      {userAddress}
-      <br />
-      <button onClick={BuyCard}>구매하기</button>
-      {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
-
-      {/* <button onClick={onClickMint}>발행</button>
-       */}
+      <PriceContainer>
+        <div>
+          <PriceLabel>판매가</PriceLabel>
+          <Price>0.01 KLAY</Price>
+        </div>
+        <button onClick={BuyCard}>구매하기</button>
+        {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
+      </PriceContainer>
     </>
   );
 };

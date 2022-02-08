@@ -12,6 +12,14 @@ import styled from "styled-components";
 import Image from "next/image";
 
 const Container = styled.div`
+  h1 {
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin: 20px 0px;
+  }
+`;
+
+const CardsContainer = styled.div`
   display: flex;
 `;
 
@@ -32,7 +40,9 @@ const Button = styled.div`
 // 로그인 된 유저의 콜렉션
 const UserCollection: NextPage = () => {
   const isLogin = useAppSelector((state) => state.user.isLogin);
-  const userAddress = "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327"; //임시 주소
+  //const userAddress = "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327"; //임시 주소
+  const userAddress = useAppSelector((state) => state.user.userAddress);
+  const userBalance = useAppSelector((state) => state.user.userBalance);
 
   const [modal, setModal] = useState(false);
   const [nftInfo, setNftInfo] = useState({
@@ -61,13 +71,13 @@ const UserCollection: NextPage = () => {
   };
 
   useEffect(() => {
-    fetchMyNFTs();
-  }, []);
+    if (userAddress !== "0x0000000000") fetchMyNFTs();
+  }, [userAddress]);
 
   return (
-    <>
+    <Container>
       <Title>콜렉션</Title>
-      <h1>NFT 콜렉션</h1>
+      <h1>내 콜렉션</h1>
 
       <Modal
         show={modal}
@@ -93,56 +103,25 @@ const UserCollection: NextPage = () => {
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
         </ModalBody>
       </Modal>
-      <Container>
-        {nfts.map((nft, index) => (
-          <CollectionCard
-            key={`nft${nft.id}`}
-            nftInfo={nft}
-            onClick={() => {
-              setModal(true);
-              setNftInfo(nft);
-              setQrvalue("DEFAULT");
-            }}
-          ></CollectionCard>
-        ))}
-      </Container>
-    </>
+      {nfts.length ? (
+        <CardsContainer>
+          {nfts.map((nft, index) => (
+            <CollectionCard
+              key={`nft${nft.id}`}
+              nftInfo={nft}
+              onClick={() => {
+                setModal(true);
+                setNftInfo(nft);
+                setQrvalue("DEFAULT");
+              }}
+            ></CollectionCard>
+          ))}
+        </CardsContainer>
+      ) : (
+        <>보유한 NFT가 없습니다</>
+      )}
+    </Container>
   );
 };
 
 export default UserCollection;
-function myAddress(
-  myAddress: any,
-  tokenID: any,
-  setQrvalue: any,
-  arg3: (result: any) => void
-) {
-  throw new Error("Function not implemented.");
-}
-function tokenID(
-  myAddress: (
-    myAddress: any,
-    tokenID: any,
-    setQrvalue: any,
-    arg3: (result: any) => void
-  ) => void,
-  tokenID: any,
-  setQrvalue: any,
-  arg3: (result: any) => void
-) {
-  throw new Error("Function not implemented.");
-}
-
-function setQrvalue(
-  myAddress: (
-    myAddress: any,
-    tokenID: any,
-    setQrvalue: any,
-    arg3: (result: any) => void
-  ) => void,
-  tokenID: any,
-  setQrvalue: any,
-  arg3: (result: any) => void
-) {
-  throw new Error("Function not implemented.");
-}
