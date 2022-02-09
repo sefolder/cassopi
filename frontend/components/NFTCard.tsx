@@ -12,12 +12,14 @@ const NFTCard = ({
   artId,
   uri,
   price,
+  width,
 }: {
   artId: number;
   uri: string;
   price: number;
+  width?: number;
 }) => (
-  <Container>
+  <Container style={{width:`${width}%`}}>
     <Link href={`/market/${artId}`}>
       <a>
         <Image
