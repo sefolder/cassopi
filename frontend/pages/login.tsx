@@ -7,10 +7,53 @@ import { getBalance } from "../api/useCaver";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import { User, login, logout, setUserBalance } from "../settings/slices/user";
 import { useCookies } from "react-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQrcode } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
 
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = "0x0000000000000000000000000000000000000000";
 const DEFAULT_BALANCE = "0";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  font-size: 30px;
+  margin-right: 10px;
+`;
+
+const AddressBox = styled.div`
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #73d1be;
+  color: white;
+  display: flex;
+  margin: 30px;
+`;
+
+const Btn = styled.button`
+  border-radius: 6px;
+  border: none;
+  background-color: ${(props) => props.theme.klipColor};
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 13px;
+  margin-top: 30px;
+  transition: opacity 0.1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    opacity: 90%;
+  }
+`;
 
 const Profile: NextPage = () => {
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
@@ -32,19 +75,20 @@ const Profile: NextPage = () => {
   };
 
   return (
-    <>
+    <Container>
       <Title>Login</Title>
 
       {isLogin ? (
         <>
-          <h1>Address: {userAddress}</h1>
-          <h1>
+          <AddressBox>Address: {userAddress}</AddressBox>
+          <h1>로그인이 완료되었습니다.</h1>
+          {/* <h1>
             Balance: {userBalance} klay{" "}
             <button onClick={checkBalance}> 새로고침 </button>
-          </h1>
+          </h1> */}
 
           <br />
-          <button
+          <Btn
             onClick={() => {
               setQrOn(false);
               dispatch(logout());
@@ -54,19 +98,19 @@ const Profile: NextPage = () => {
             }}
           >
             로그아웃
-          </button>
+          </Btn>
         </>
       ) : (
         <>
           {qrOn ? (
             <>
-              <h1>Address: {address}</h1>
+              <AddressBox>Address: {userAddress}</AddressBox>
               <QRCode value={qrvalue} />
             </>
           ) : null}
           <br />
           <br />
-          <button
+          <Btn
             onClick={async () => {
               setQrOn(true);
               getAddress(setQrvalue, async (address) => {
@@ -82,11 +126,12 @@ const Profile: NextPage = () => {
               });
             }}
           >
+            <Icon icon={faQrcode} />
             {qrOn ? <>로그인 QR 코드 다시 받기</> : <>로그인 QR 코드 받기</>}
-          </button>
+          </Btn>
         </>
       )}
-    </>
+    </Container>
   );
 };
 
