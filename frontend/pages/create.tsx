@@ -5,14 +5,16 @@ import { useState } from "react";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 import * as KlipAPI from "../api/useKlip";
 import styled from "styled-components";
-import Image from 'next/image'
+import Image from "next/image";
 
 const Bigtxt = styled.div`
   font-size: 40px;
   font-weight: bold;
+  text-align: center;
 `;
 const Middletxt = styled.div`
-  font-size: 20px;
+  font-size: 28px;
+  font-weight: bold;
 `;
 const Smalltxt = styled.div`
   font-size: 15px;
@@ -44,6 +46,12 @@ const CardButton = styled.button`
     background-color: white;
     color: skyblue;
   }
+`;
+
+const ImgWrapper = styled.div`
+  position: relative;
+  min-width: 500px;
+  min-height: 500px;
 `;
 
 const DEFAULT_QR_CODE = "DEFAULT";
@@ -78,7 +86,6 @@ const Create: NextPage = () => {
   return (
     <>
       <Title>Create</Title>
-      <h1>Create</h1>
       {isLogin ? (
         <>
           {qrvalue !== "DEFAULT" ? (
@@ -93,7 +100,6 @@ const Create: NextPage = () => {
               <QRCode value={qrvalue} size={256} style={{ margin: "auto" }} />
             </div>
           ) : null}
-          <h1>Address: {userAddress}</h1> <br />
           <br />
           <br />
           <Bigtxt>Create New NFT</Bigtxt>
@@ -112,7 +118,14 @@ const Create: NextPage = () => {
           {/* 파일 업로드 */}
           <Card>
             {mintImageUrl !== "" ? (
-              <Image src={mintImageUrl} alt="Image to Mint" height={"50%"} />
+              <ImgWrapper>
+                <Image
+                  src={mintImageUrl}
+                  alt="Image to Mint"
+                  layout="fill"
+                  objectFit="contain"
+                />
+              </ImgWrapper>
             ) : null}
             <form
               onSubmit={(event: React.FormEvent<HTMLFormElement>) => {

@@ -29,13 +29,12 @@ const Bigtxt = styled.div`
   font-weight: bold;
 `;
 
-
 const Square = styled.div`
   width: 160px;
   height: 160px;
   border-radius: 10%;
   background-color: lightgrey;
-`
+`;
 
 const NFT1Container = styled.div`
   display: grid;
@@ -45,14 +44,14 @@ const NFT1Container = styled.div`
   grid-row: 1 / span 2;
   grid-gap: 20px;
   //background-color: #8592929e;
-`
+`;
 
 const NFT2Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(250px, auto);
   //background-color: #8592929e;
-`
+`;
 
 const Home: NextPage = () => {
   const BannerURL =
@@ -96,26 +95,38 @@ const Home: NextPage = () => {
       </BannerContainer>
       <br />
       <br />
-      <Bigtxt>인기 NFT</Bigtxt> <br/>
+      <Bigtxt>인기 NFT</Bigtxt> <br />
       <NFT1Container>
-      <Square style={{"gridColumn": "1/2", "gridRow": "1/2"}}/><Square/><Square/><Square/><Square/><Square/><Square/><Square/><Square/>
+        <Square style={{ gridColumn: "1/2", gridRow: "1/2" }} />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
       </NFT1Container>
-      <br /><br/>
       <br />
-      <Bigtxt>최근 올라온 NFT</Bigtxt> <br/>
+      <br />
+      <br />
+      <Bigtxt>최근 올라온 NFT</Bigtxt> <br />
       <NFT2Container>
-      {nfts2.slice(0).reverse().map(
-        (nft, index) =>
-          nft.uri.length > 0 && (
-            <NFTCard
-              key={`NFT${nft.id}`}
-              artId={nft.id}
-              uri={nft.uri}
-              price={0.01}
-              width={100}
-            ></NFTCard>
-          )
-      )}
+        {nfts2
+          .slice(0)
+          .reverse()
+          .map(
+            (nft, index) =>
+              nft.uri.length > 0 && (
+                <NFTCard
+                  key={`NFT${nft.id}`}
+                  artId={nft.id}
+                  uri={nft.uri}
+                  price={0.01}
+                  width={80}
+                ></NFTCard>
+              )
+          )}
       </NFT2Container>
     </>
   );
