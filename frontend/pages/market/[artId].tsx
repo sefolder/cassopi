@@ -76,6 +76,7 @@ const Art: NextPage = () => {
           <Price>0.01 KLAY</Price>
         </div>
         <button onClick={BuyCard}>구매하기</button>
+        <br/><br/>
         {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
       </PriceContainer>
     </>
