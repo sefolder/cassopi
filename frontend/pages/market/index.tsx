@@ -14,7 +14,10 @@ const Container = styled.div`
 `;
 
 const NFTContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  height: 100%;
 `;
 
 const Market: NextPage = () => {
