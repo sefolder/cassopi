@@ -6,14 +6,30 @@ import * as KlipAPI from "../../api/useKlip";
 import QRCode from "qrcode.react";
 import { useAppSelector } from "../../settings/hooks";
 import styled from "styled-components";
+import Image from "next/image";
+import { useEffect } from "react";
+import { fetchNFTInfo } from "../../api/useCaver";
+
+const InfoCWrapper = styled.div``;
+
+const TextWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+`;
+
+const NFTContainer = styled.div`
+  min-height: 500px;
+  position: relative;
+`;
 
 const PriceContainer = styled.div`
   padding: 12px;
   border: 1px solid gray;
-  display: inline-block;
   border-radius: 5px;
   min-width: 320px;
   text-align: center;
+  height: 110px;
 
   div {
     display: flex;
@@ -33,6 +49,45 @@ const PriceContainer = styled.div`
     cursor: pointer;
   }
 `;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+
+  h1 {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-right: 20px;
+  }
+
+  span {
+    font-size: 1rem;
+  }
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-left: 15px;
+  }
+`;
+
+const Descriptions = styled.div`
+  margin-top: 20px;
+  line-height: 20px;
+  color: gray;
+`;
+
+const ProfileImg = styled(Image)`
+  border-radius: 100%;
+`;
+
+const NFTImg = styled(Image);
 
 const Price = styled.div`
   font-weight: bold;
@@ -54,6 +109,7 @@ const Art: NextPage = () => {
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
   const [qrvalue, setQrvalue] = useState("DEFAULT");
+  const [uri, setUri] = useState("");
 
   const BuyCard = () => {
     KlipAPI.buyCard(
@@ -66,21 +122,86 @@ const Art: NextPage = () => {
     );
   };
 
+  useEffect(() => {
+    (async () => {
+      if (artId) setUri(await fetchNFTInfo(artId as string));
+    })();
+  }, [artId]);
+
   return (
     <>
       <Title>{artId}</Title>
-      <h1>Art {artId}</h1>
-      <PriceContainer>
-        <div>
-          <PriceLabel>판매가</PriceLabel>
-          <Price>0.01 KLAY</Price>
-        </div>
-        <button onClick={BuyCard}>구매하기</button>
-        <br/><br/>
-        {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
-      </PriceContainer>
+      <NFTContainer>
+        {uri !== "" ? (
+          <Image src={uri} alt="NFT" layout="fill" objectFit="cover" />
+        ) : null}
+      </NFTContainer>
+      <TextWrapper>
+        <InfoCWrapper>
+          <TitleContainer>
+            <h1>NFT 제목</h1>
+            <span>#{artId}</span>
+          </TitleContainer>
+          <ProfileContainer>
+            <ProfileImg
+              alt="profile"
+              src="../home_banner_cropped.png"
+              width={50}
+              height={50}
+              objectFit="cover"
+            />
+            <span>심윤보</span>
+          </ProfileContainer>
+          <Descriptions>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in
+            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
+            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+            cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.
+          </Descriptions>
+        </InfoCWrapper>
+        <PriceContainer>
+          <div>
+            <PriceLabel>판매가</PriceLabel>
+            <Price>0.01 KLAY</Price>
+          </div>
+          <button onClick={BuyCard}>구매하기</button>
+          <br />
+          <br />
+          {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
+        </PriceContainer>
+      </TextWrapper>
     </>
   );
 };
 
 export default Art;
+
+/*export function getServerSideProps({ params: { params } }: { params: any }) {
+  return {
+    props: { params },
+  };
+}*/

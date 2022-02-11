@@ -52,6 +52,8 @@ export const fetchCardsOf = async (address: any) => {
     tokenIds.push(id);
   }
 
+  console.log(tokenIds);
+
   // fetch token URIs
   const tokenUris = [];
   for (let i = 0; i < balance; i++) {
@@ -66,4 +68,9 @@ export const fetchCardsOf = async (address: any) => {
   console.log("nft", nfts);
 
   return nfts;
+};
+
+export const fetchNFTInfo = async (tokenId: any) => {
+  const uri = await NFTContract.methods.tokenURI(tokenId).call();
+  return uri;
 };
