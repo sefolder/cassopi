@@ -4,6 +4,7 @@ declare module "styled-components" {
   export interface DefaultTheme {
     navBarHeight: string;
     klipColor: string;
+    mainColor: string;
     defaultBackgroundColor: string;
   }
 }
