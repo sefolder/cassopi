@@ -54,7 +54,7 @@ const NFTCard = ({
   price: number;
   width?: number;
 }) => (
-  <Container>
+  <Container style={{width:`${width}%`}}>
     <Link href={`/market/${artId}`}>
       <a>
         <NFTWrapper>
