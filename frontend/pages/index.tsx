@@ -123,7 +123,6 @@ const Home: NextPage = () => {
                   artId={nft.id}
                   uri={nft.uri}
                   price={0.01}
-                  width={80}
                 ></NFTCard>
               )
           )}

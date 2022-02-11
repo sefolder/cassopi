@@ -6,14 +6,14 @@ const Container = styled.div`
   border-radius: 5px;
   margin: 2vw;
   margin-left: 0;
-  cursor: pointer;
-  display: block;
   border-radius: 10px;
   box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.3);
 `;
 
 const NFTWrapper = styled.div`
   width: 100%;
+  height: 200px;
+  position: relative;
 `;
 
 const InfoWrapper = styled.div`
@@ -54,26 +54,20 @@ const NFTCard = ({
   price: number;
   width?: number;
 }) => (
-  <Container>
-    <Link href={`/market/${artId}`}>
-      <a>
+  <Link href={`/market/${artId}`}>
+    <a>
+      <Container>
         <NFTWrapper>
-          <CardImage
-            src={uri}
-            alt="artId"
-            width={200}
-            height={200}
-            objectFit="cover"
-          />
+          <CardImage src={uri} alt="artId" layout="fill" objectFit="cover" />
         </NFTWrapper>
         <InfoWrapper>
           <NFTName>NFT제목</NFTName>
           <Creater>심윤보</Creater>
           <Price>{price} KLAY</Price>
         </InfoWrapper>
-      </a>
-    </Link>
-  </Container>
+      </Container>
+    </a>
+  </Link>
 );
 
 export default NFTCard;
