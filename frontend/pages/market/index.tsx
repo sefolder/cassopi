@@ -20,6 +20,21 @@ const NFTsContainer = styled.div`
   margin-left: 270px;
 `;
 
+const Container = styled.div`
+  h1 {
+    margin-top: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+`;
+
+const NFTContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  height: 100%;
+`;
+
 const Market: NextPage = () => {
   const [nfts, setNfts] = useState([
     {
@@ -38,25 +53,27 @@ const Market: NextPage = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <Title>Market</Title>
       <SideContainer>
         <SideH1>Dreaming Marketplace</SideH1>
       </SideContainer>
       <NFTsContainer>
-        {nfts.map(
-          (nft) =>
-            nft.uri.length > 0 && (
-              <NFTCard
-                key={`NFT${nft.id}`}
-                artId={nft.id}
-                uri={nft.uri}
-                price={0.01}
-              ></NFTCard>
-            )
-        )}
+        <NFTContainer>
+          {nfts.map(
+            (nft, index) =>
+              nft.uri.length > 0 && (
+                <NFTCard
+                  key={`NFT${nft.id}`}
+                  artId={nft.id}
+                  uri={nft.uri}
+                  price={0.01}
+                ></NFTCard>
+              )
+          )}
+        </NFTContainer>
       </NFTsContainer>
-    </>
+    </Container>
   );
 };
 
