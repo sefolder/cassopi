@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector, useInput } from "../settings/hooks";
 //import { userActions } from "../settings/store";
 
-import searchIcon from "../assets/search.svg";
+import searchIcon from "../public/search.svg";
 import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/router";
