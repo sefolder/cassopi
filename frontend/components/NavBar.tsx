@@ -18,6 +18,7 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 3px 20px 0 rgba(31, 38, 135, 0.2);

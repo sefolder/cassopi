@@ -1,8 +1,24 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
 import { fetchCardsOf } from "../../api/useCaver";
 import NFTCard from "../../components/NFTCard";
 import Title from "../../components/Title";
+
+const SideContainer = styled.div`
+  width: 250px;
+  position: fixed;
+`;
+
+const SideH1 = styled.h1`
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.25;
+`;
+
+const NFTsContainer = styled.div`
+  margin-left: 270px;
+`;
 
 const Market: NextPage = () => {
   const [nfts, setNfts] = useState([
@@ -24,18 +40,22 @@ const Market: NextPage = () => {
   return (
     <>
       <Title>Market</Title>
-      <h1>Market</h1>
-      {nfts.map(
-        (nft, index) =>
-          nft.uri.length > 0 && (
-            <NFTCard
-              key={`NFT${nft.id}`}
-              artId={nft.id}
-              uri={nft.uri}
-              price={0.01}
-            ></NFTCard>
-          )
-      )}
+      <SideContainer>
+        <SideH1>Dreaming Marketplace</SideH1>
+      </SideContainer>
+      <NFTsContainer>
+        {nfts.map(
+          (nft) =>
+            nft.uri.length > 0 && (
+              <NFTCard
+                key={`NFT${nft.id}`}
+                artId={nft.id}
+                uri={nft.uri}
+                price={0.01}
+              ></NFTCard>
+            )
+        )}
+      </NFTsContainer>
     </>
   );
 };
