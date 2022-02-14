@@ -6,6 +6,7 @@ import { CookiesProvider } from "react-cookie";
 import { useRouter } from "next/router";
 import { useAppSelector } from "../settings/hooks";
 import { userOnlyList } from "../settings/navlists";
+import Footer from "./Footer";
 
 const Container = styled.div`
   width: 100%;
@@ -43,6 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Content>
             <Center>{children}</Center>
           </Content>
+          <Footer />
         </Container>
 
         <style jsx global>{`

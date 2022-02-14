@@ -20,3 +20,9 @@ export const userOnlyList: string[] = [
   "/profile/info",
   "/profile/edit",
 ];
+
+export const footerList: INavlist[] = [
+  { id: 1, pathname: "/policy", name: "이용약관" },
+  { id: 2, pathname: "/privacy", name: "개인정보처리방침" },
+  { id: 3, pathname: "/sitemap", name: "사이트맵" },
+];
