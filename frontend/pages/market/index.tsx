@@ -35,16 +35,36 @@ const NFTContainer = styled.div`
   height: 100%;
 `;
 
+interface Imetadata {
+  name: string;
+  description: string;
+  attributes: any;
+}
+interface Infts {
+  id: number;
+  image: string;
+  metadata: Imetadata;
+}
+
 const Market: NextPage = () => {
-  const [nfts, setNfts] = useState([
-    {
-      id: 0,
-      uri: "",
+  const [nfts, setNfts] = useState<Infts[]>([{
+    id: 0,
+    image: "",
+    metadata: {
+      name: "",
+      description: "",
+      attributes: [],
     },
-  ]);
+  }]);
 
   const fetchMarketNFTs = async () => {
     const _nfts = await fetchCardsOf(process.env.NEXT_PUBLIC_MARKET_CONTRACT);
+
+    for (let i=0; i<_nfts.length; i++){
+      _nfts[i].id = Number(_nfts[i].id);
+    }
+    
+    console.log("_nfts is ", _nfts);
     setNfts(_nfts);
   };
 
@@ -62,11 +82,11 @@ const Market: NextPage = () => {
         <NFTContainer>
           {nfts.map(
             (nft, index) =>
-              nft.uri.length > 0 && (
+              nft.image.length > 0 && (
                 <NFTCard
                   key={`NFT${nft.id}`}
                   artId={nft.id}
-                  uri={nft.uri}
+                  image={nft.image}
                   price={0.01}
                 ></NFTCard>
               )

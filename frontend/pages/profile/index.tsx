@@ -37,6 +37,17 @@ const Button = styled.div`
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
 `;
 
+interface Imetadata {
+  name: string;
+  description: string;
+  attributes: any;
+}
+interface Infts {
+  id: number;
+  image: string;
+  metadata: Imetadata;
+}
+
 // 로그인 된 유저의 콜렉션
 const UserCollection: NextPage = () => {
   const isLogin = useAppSelector((state) => state.user.isLogin);
@@ -45,25 +56,39 @@ const UserCollection: NextPage = () => {
   const userBalance = useAppSelector((state) => state.user.userBalance);
 
   const [modal, setModal] = useState(false);
-  const [nftInfo, setNftInfo] = useState({
+  const [nftInfo, setNftInfo] = useState<Infts>({
     id: 0,
-    uri: "",
+    image: "",
+    metadata: {
+      name: "",
+      description: "",
+      attributes: [],
+    },
   });
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const priceInput = useInput(0);
 
-  const [nfts, setNfts] = useState([
-    {
-      id: 0,
-      uri: "",
+  const [nfts, setNfts] = useState<Infts[]>([{
+    id: 0,
+    image: "",
+    metadata: {
+      name: "",
+      description: "",
+      attributes: [],
     },
-  ]);
+  }]);
 
   const fetchMyNFTs = async () => {
     const _nfts = await fetchCardsOf(userAddress);
+    
+    for (let i=0; i<_nfts.length; i++){
+      _nfts[i].id = Number(_nfts[i].id);
+    }
+    
+    console.log("_nfts is ", _nfts);
     setNfts(_nfts);
   };
-
+  
   const onConfirm = () => {
     displayCard(userAddress, nftInfo.id, setQrvalue, (result) => {
       alert(JSON.stringify(result));
@@ -93,7 +118,7 @@ const UserCollection: NextPage = () => {
             }}
           >
             <Image
-              src={nftInfo.uri}
+              src={nftInfo.image}
               alt="nft"
               layout="fill"
               objectFit="contain"
@@ -110,6 +135,7 @@ const UserCollection: NextPage = () => {
               key={`nft${nft.id}`}
               nftInfo={nft}
               onClick={() => {
+                console.log("nftInfo to cardscontainer is ", nft)
                 setModal(true);
                 setNftInfo(nft);
                 setQrvalue("DEFAULT");

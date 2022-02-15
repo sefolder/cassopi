@@ -45,12 +45,12 @@ const Creater = styled.span`
 
 const NFTCard = ({
   artId,
-  uri,
+  image,
   price,
   width,
 }: {
   artId: number;
-  uri: string;
+  image: string;
   price: number;
   width?: number;
 }) => (
@@ -58,7 +58,7 @@ const NFTCard = ({
     <a>
       <Container>
         <NFTWrapper>
-          <CardImage src={uri} alt="artId" layout="fill" objectFit="cover" />
+          <CardImage src={image} alt="artId" layout="fill" objectFit="cover" />
         </NFTWrapper>
         <InfoWrapper>
           <NFTName>NFT제목</NFTName>

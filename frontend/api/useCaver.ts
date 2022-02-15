@@ -1,3 +1,4 @@
+import axios from "axios";
 import Caver from "caver-js";
 import { AbiItem } from "caver-js/types/packages/caver-utils/src";
 import KIP17ABI from "../abi/KIP17TokenABI.json";
@@ -54,16 +55,48 @@ export const fetchCardsOf = async (address: any) => {
 
   console.log(tokenIds);
 
-  // fetch token URIs
-  const tokenUris = [];
+  const tokenMetadata = [];
+  const tokenDescriptions = [];
+  const tokenName = [];
+  const tokenAttributes = [];
+  // fetch token Images
+  const tokenImages = [];
+  // for (let i = 0; i < balance; i++) {
+  //   const id = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> image 주소
+  //   tokenUris.push(id);
+  // }
   for (let i = 0; i < balance; i++) {
-    const id = await NFTContract.methods.tokenURI(tokenIds[i]).call();
-    tokenUris.push(id);
+    const metadataUrl = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
+    const response = await axios.get(metadataUrl); // 실제 메타데이터
+    console.log("response is ", response);
+    const uriJSON = response.data;
+
+    const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+    tokenImages.push(imageurl);
+    
+    const tempAttributes = [];
+    for (let j=0; j<uriJSON.attributes.length; j++){
+      tempAttributes.push(uriJSON.attributes[j]);
+    }
+    // tokenAttributes.push(tempAttributes);
+    // tokenDescriptions.push(uriJSON.description);
+    // tokenName.push(uriJSON.name);
+
+    const tempMetadata = {
+      name:<string> "",
+      description:<string> "",
+      attributes:<any> [],
+    }
+    tempMetadata.name = String(uriJSON.name);
+    tempMetadata.description = String(uriJSON.description);
+    tempMetadata.attributes = tempAttributes;
+    tokenMetadata.push(tempMetadata);
   }
+  console.log("tokenMetadata is ", tokenMetadata);
 
   const nfts = [];
   for (let i = 0; i < balance; i++) {
-    nfts.push({ uri: tokenUris[i], id: tokenIds[i] });
+    nfts.push({ image: tokenImages[i], id: tokenIds[i], metadata: tokenMetadata[i], });
   }
   console.log("nft", nfts);
 

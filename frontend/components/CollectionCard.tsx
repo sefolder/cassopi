@@ -14,22 +14,36 @@ const CardImage = styled(Image)`
   border-radius: 10px;
 `;
 
+interface Imetadata {
+  name: string;
+  description: string;
+  attributes: any;
+}
+interface Infts {
+  id: string;
+  image: string;
+  metadata: Imetadata;
+}
+
 const CollectionCard = ({
   nftInfo,
   onClick,
 }: {
-  nftInfo: { id: number; uri: string };
+  nftInfo: { id: number; image: string; metadata: Imetadata };
   onClick: () => void;
 }) => (
   <Container onClick={onClick}>
-    {nftInfo.uri.length > 0 && (
-      <CardImage
-        src={nftInfo.uri}
-        alt={`NFT${nftInfo.id}`}
-        width={200}
-        height={200}
-        objectFit="cover"
-      ></CardImage>
+    {nftInfo.image.length > 0 && (
+      <>
+        <CardImage
+          src={nftInfo.image}
+          alt={`NFT${nftInfo.id}`}
+          width={200}
+          height={200}
+          objectFit="cover"
+        ></CardImage>
+        <br/>metadata is {nftInfo.metadata}
+      </>
     )}
   </Container>
 );

@@ -61,21 +61,24 @@ const Create: NextPage = () => {
   const [qrvalue, setQrvalue] = useState(DEFAULT_QR_CODE);
   const [qrOn, setQrOn] = useState(false);
   const [mintImageUrl, setMintImageUrl] = useState("");
+  const [mintTokenID, setMintTokenID] = useState("");
 
   const isLogin = useAppSelector((state) => state.user.isLogin);
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
 
-  const onClickMint = async (uri: string) => {
+  const onClickMint = async (metadataURL: string, tokenID: number) => {
     if (userAddress === DEFAULT_ADDRESS) {
       alert("NO ADDRESS");
       return;
     }
-    const randomTokenId = Math.round(Math.random() * 10000000);
+    //const randomTokenId = Math.round(Math.random() * 10000000);
+    console.log("metadataURL is ", metadataURL);
     KlipAPI.mintCardWithURI(
       userAddress,
-      randomTokenId,
-      uri,
+      //randomTokenId,
+      tokenID,
+      metadataURL,
       setQrvalue,
       (result) => {
         alert(JSON.stringify(result));
@@ -130,22 +133,39 @@ const Create: NextPage = () => {
             <form
               onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
                 event.preventDefault();
-                onClickMint(mintImageUrl);
+                onClickMint(mintImageUrl, parseInt(mintTokenID));
               }}
             >
               <div
                 style={{ alignItems: "center", width: "90%", margin: "0 auto" }}
               >
+                <br/>
                 <input
-                  value={mintImageUrl}
+                  //value={mintImageUrl}
                   onChange={(e) => {
                     console.log("new image: ", e.target.value);
-                    setMintImageUrl(e.target.value);
+                    let tempURL = "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
+                    console.log("tempURL = ", tempURL);
+                    setMintImageUrl(tempURL);
                   }}
                   type="text"
-                  placeholder="이미지 주소를 입력해주세요"
+                  placeholder="메타데이터 URI 주소를 입력해주세요"
                   style={{ alignItems: "center", width: "100%" }}
                 />
+                <br/>
+                <br/>
+                <input
+                  value={mintTokenID}
+                  onChange={(e) => {
+                    console.log("token ID: ", e.target.value);
+                    setMintTokenID(e.target.value);
+                  }}
+                  type="text"
+                  placeholder="토큰 ID를 입력해주세요"
+                  style={{ alignItems: "center", width: "100%" }}
+                />
+                배정된 Token ID 범위 : 1004100 ~ 1004199 <br/>
+                사용 완료 : 1004199, 1004198
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <CardButton>발행하기</CardButton>
