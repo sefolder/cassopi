@@ -8,7 +8,7 @@ import { useAppSelector } from "../../settings/hooks";
 import styled from "styled-components";
 import Image from "next/image";
 import { useEffect } from "react";
-import { fetchNFTInfo } from "../../api/useCaver";
+import { fetchCardsOf, fetchNFTIds, fetchNFTInfo } from "../../api/useCaver";
 
 const InfoCWrapper = styled.div``;
 
@@ -200,8 +200,37 @@ const Art: NextPage = () => {
 
 export default Art;
 
-/*export function getServerSideProps({ params: { params } }: { params: any }) {
+/*
+export async function getStaticPaths() {
   return {
-    props: { params },
+    paths: [
+      { params: { artId: "1" } },
+      { params: { artId: "7420586" } },
+      { params: { artId: "8401191" } },
+      { params: { artId: "8096025" } },
+      { params: { artId: "6281016" } },
+    ],
+    fallback: false,
   };
-}*/
+}
+*/
+
+export async function getStaticPaths() {
+  const ids = await fetchNFTIds(process.env.NEXT_PUBLIC_MARKET_CONTRACT);
+
+  const path = ids.map((id) => {
+    return { params: { artId: id } };
+  });
+
+  console.log(path);
+
+  return {
+    paths: path,
+    fallback: false,
+  };
+}
+
+export const getStaticProps = async ({ params }: { params: any }) => {
+  //페이지에 props로 보냄
+  return { props: { id: params.artId } };
+};
