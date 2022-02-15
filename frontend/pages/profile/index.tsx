@@ -62,33 +62,35 @@ const UserCollection: NextPage = () => {
     metadata: {
       name: "",
       description: "",
-      attributes: [],
+      attributes: [{}],
     },
   });
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const priceInput = useInput(0);
 
-  const [nfts, setNfts] = useState<Infts[]>([{
-    id: 0,
-    image: "",
-    metadata: {
-      name: "",
-      description: "",
-      attributes: [],
+  const [nfts, setNfts] = useState<Infts[]>([
+    {
+      id: 0,
+      image: "",
+      metadata: {
+        name: "",
+        description: "",
+        attributes: [{}],
+      },
     },
-  }]);
+  ]);
 
   const fetchMyNFTs = async () => {
     const _nfts = await fetchCardsOf(userAddress);
-    
-    for (let i=0; i<_nfts.length; i++){
+
+    for (let i = 0; i < _nfts.length; i++) {
       _nfts[i].id = Number(_nfts[i].id);
     }
-    
+
     console.log("_nfts is ", _nfts);
     setNfts(_nfts);
   };
-  
+
   const onConfirm = () => {
     displayCard(userAddress, nftInfo.id, setQrvalue, (result) => {
       alert(JSON.stringify(result));
@@ -135,7 +137,7 @@ const UserCollection: NextPage = () => {
               key={`nft${nft.id}`}
               nftInfo={nft}
               onClick={() => {
-                console.log("nftInfo to cardscontainer is ", nft)
+                console.log("nftInfo to cardscontainer is ", nft);
                 setModal(true);
                 setNftInfo(nft);
                 setQrvalue("DEFAULT");

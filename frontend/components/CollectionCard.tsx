@@ -42,7 +42,8 @@ const CollectionCard = ({
           height={200}
           objectFit="cover"
         ></CardImage>
-        <br/>metadata is {nftInfo.metadata}
+        <br />
+        {/*metadata is nftInfo.metadata*/}
       </>
     )}
   </Container>
