@@ -141,7 +141,7 @@ const Art: NextPage = () => {
   const BuyCard = () => {
     KlipAPI.buyCard(
       parseInt(artId as string),
-      10 ** 16, //1 KLAY = 10 ** 18 pem
+      10 ** 18 * 3, //1 KLAY = 10 ** 18 pem
       setQrvalue,
       (result) => {
         alert(JSON.stringify(result));
@@ -155,7 +155,7 @@ const Art: NextPage = () => {
         setMetadata(await fetchNFTInfo(artId as string));
         const _seller = await getSeller(parseInt(artId as string));
         if (_seller === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
-          setSeller("Hong");
+          setSeller("ryeowon");
         else if (_seller === "0x04eDD3CFE636cd7721c5C269C526f48E6c037A17")
           setSeller("sunny");
         else if (_seller === "0x71b515c2aed4B59ccf93be7C1393C51228f0d89C")
@@ -200,7 +200,7 @@ const Art: NextPage = () => {
         <PriceContainer>
           <div>
             <PriceLabel>판매가</PriceLabel>
-            <Price>0.01 KLAY</Price>
+            <Price>3 KLAY</Price>
           </div>
           <button onClick={BuyCard}>구매하기</button>
           <br />

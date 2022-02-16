@@ -143,7 +143,7 @@ const UserCollection: NextPage = () => {
       })();
     }
     if (userAddress === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
-      setUsername("Hong");
+      setUsername("ryeowon");
     else if (userAddress === "0x04eDD3CFE636cd7721c5C269C526f48E6c037A17")
       setUsername("sunny");
     else if (userAddress === "0x71b515c2aed4B59ccf93be7C1393C51228f0d89C")
@@ -205,7 +205,7 @@ const UserCollection: NextPage = () => {
       <Modal
         show={modal}
         onClose={() => setModal(false)}
-        title={`NFT #${nftInfo.id}`}
+        title={`${nftInfo.metadata.name}`}
       >
         <ModalBody>
           <div
@@ -222,8 +222,15 @@ const UserCollection: NextPage = () => {
               objectFit="contain"
             />
           </div>
+          <div>{nftInfo.metadata.description}</div>
           <Button onClick={onConfirm}>마켓에 올리기</Button>
-          {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
+          {qrvalue !== "DEFAULT" ? (
+            <div>
+              <QRCode value={qrvalue} />
+              <br />
+              NFT 가격은 3KLAY로 고정됩니다
+            </div>
+          ) : null}
         </ModalBody>
       </Modal>
     </Container>

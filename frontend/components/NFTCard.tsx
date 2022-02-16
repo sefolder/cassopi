@@ -63,7 +63,7 @@ const NFTCard = ({ price, nftInfo }: { price: number; nftInfo: Infts }) => {
     (async () => {
       const _seller = await getSeller(nftInfo.id);
       if (_seller === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
-        setSeller("Hong");
+        setSeller("ryeowon");
       else if (_seller === "0x04eDD3CFE636cd7721c5C269C526f48E6c037A17")
         setSeller("sunny");
       else if (_seller === "0x71b515c2aed4B59ccf93be7C1393C51228f0d89C")

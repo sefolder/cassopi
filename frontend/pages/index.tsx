@@ -227,11 +227,7 @@ const Home: NextPage = () => {
           .map(
             (nft, index) =>
               nft.image.length > 0 && (
-                <NFTCard
-                  key={`NFT${nft.id}`}
-                  price={0.01}
-                  nftInfo={nft}
-                ></NFTCard>
+                <NFTCard key={`NFT${nft.id}`} price={3} nftInfo={nft}></NFTCard>
               )
           )}
       </NFT2Container>

@@ -170,8 +170,9 @@ const Create: NextPage = () => {
                   placeholder="토큰 ID를 입력해주세요"
                   style={{ alignItems: "center", width: "100%" }}
                 />
-                배정된 Token ID 범위 : 1004100 ~ 1004199 <br />
-                사용 완료 : 1004199, 1004198
+                배정된 Token ID 범위 : 1~
+                <br />
+                사용 완료 : 1,2
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
                 <CardButton>발행하기</CardButton>
