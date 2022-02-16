@@ -60,6 +60,12 @@ const BannerSlider = () => {
   return (
     <Container>
       <SliderContainer ref={slideRef}>
+        <Image
+          src="serviceopen_banner_cropped.png"
+          alt="home banner 1"
+          width={1200}
+          height={650}
+        />
         <a
           href="https://forms.gle/L5AerRzfDMzDfZfbA"
           target="_blank"
@@ -67,23 +73,23 @@ const BannerSlider = () => {
         >
           <Image
             src="home_banner_cropped.png"
-            alt="home banner"
+            alt="home banner 2"
             width={1200}
             height={650}
           />
         </a>
-        <Image
-          src="home_banner_cropped.png"
-          alt="home banner"
-          width={1200}
-          height={650}
-        />
-        <Image
-          src="home_banner_cropped.png"
-          alt="home banner"
-          width={1200}
-          height={650}
-        />
+        <a
+          href="https://forms.gle/hSvDZk2jmDKWRQ5V9"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image
+            src="designer_banner_cropped.png"
+            alt="home banner 3"
+            width={1200}
+            height={650}
+          />
+        </a>
       </SliderContainer>
       <PrevButton onClick={prevSlide}>
         <FontAwesomeIcon icon={faAngleLeft} />

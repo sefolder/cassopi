@@ -9,6 +9,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useEffect } from "react";
 import { fetchCardsOf, fetchNFTIds, fetchNFTInfo } from "../../api/useCaver";
+import Modal from "../../components/Modal";
 
 const InfoCWrapper = styled.div``;
 
@@ -22,6 +23,7 @@ const TextWrapper = styled.div`
 const NFTContainer = styled.div`
   min-height: 500px;
   position: relative;
+  cursor: pointer;
 `;
 
 const PriceContainer = styled.div`
@@ -120,7 +122,7 @@ const Art: NextPage = () => {
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
   const [qrvalue, setQrvalue] = useState("DEFAULT");
-  const [uri, setUri] = useState("");
+  const [modal, setModal] = useState(false);
   const [nftInfo, setMetadata] = useState({
     image: "",
     metadata: {
@@ -150,7 +152,7 @@ const Art: NextPage = () => {
   return (
     <>
       <Title>{artId}</Title>
-      <NFTContainer>
+      <NFTContainer onClick={() => setModal(true)}>
         {nftInfo.image !== "" ? (
           <Image
             src={nftInfo.image}
@@ -189,6 +191,26 @@ const Art: NextPage = () => {
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
         </PriceContainer>
       </TextWrapper>
+      <Modal
+        show={modal}
+        onClose={() => setModal(false)}
+        title={`NFT #${artId}`}
+      >
+        <div
+          style={{
+            position: "relative",
+            minHeight: "500px",
+            minWidth: "500px",
+          }}
+        >
+          <Image
+            src={nftInfo.image}
+            alt="nft"
+            layout="fill"
+            objectFit="contain"
+          />
+        </div>
+      </Modal>
     </>
   );
 };

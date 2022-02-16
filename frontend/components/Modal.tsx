@@ -5,6 +5,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const ModalBody = styled.div`
   padding-top: 10px;
+  overflow-y: hidden;
 `;
 
 const ModalHeader = styled.div`
@@ -17,17 +18,21 @@ const ModalContainer = styled.div`
   background: white;
   border-radius: 15px;
   padding: 15px;
+  overflow-y: hidden;
 `;
 const ModalOverlay = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 `;
 
 const Modal = ({
@@ -53,7 +58,7 @@ const Modal = ({
   };
 
   const modalContent = show ? (
-    <ModalOverlay>
+    <ModalOverlay onClick={handleCloseClick}>
       <ModalContainer>
         <ModalHeader>
           {title && <div>{title}</div>}
