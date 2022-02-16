@@ -129,8 +129,8 @@ const UserCollection: NextPage = () => {
   const onConfirm = () => {
     displayCard(userAddress, nftInfo.id, setQrvalue, (result) => {
       alert(JSON.stringify(result));
+      setModal(false);
     });
-    setModal(false);
   };
 
   useEffect(() => {

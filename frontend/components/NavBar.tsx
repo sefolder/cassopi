@@ -125,6 +125,7 @@ const SearchBtn = styled.button`
 const NavList = styled.ul`
   display: flex;
   align-items: center;
+  margin: 0px 30px;
 `;
 
 const NavLi = styled.li`
@@ -259,18 +260,25 @@ const NavBar = () => {
         <NavBarLeft>
           <Link href="/" passHref>
             <HomeLink>
-              <object type="image/svg+xml" data="templogo5.svg" className="logo" width="35" height="35">
+              <object
+                type="image/svg+xml"
+                data="templogo5.svg"
+                className="logo"
+                width="35"
+                height="35"
+              >
                 Logo
               </object>
-              <span style={{paddingLeft:"10px"}}>cassoPi</span>
+              <span style={{ paddingLeft: "10px" }}>cassoPi</span>
             </HomeLink>
           </Link>
-          <SearchForm onSubmit={onSearchSubmit}>
+          <div>abcdefg</div>
+          {/* <SearchForm onSubmit={onSearchSubmit}>
             <SearchInput placeholder="cassoPi에서 검색..." {...searchInput} />
             <SearchBtn>
               <Image src={searchIcon} alt="search" />
             </SearchBtn>
-          </SearchForm>
+          </SearchForm> */}
           <NavList>
             {navList.map(({ id, pathname, name }) => (
               <NavLi key={id}>
@@ -307,7 +315,9 @@ const NavBar = () => {
                   <span>로그아웃</span>
                 </UserLi>
               </UserList>
-              <span style={{marginLeft:"10px", fontSize:"1.2em"}}>{userBalance}KLAY</span>
+              <span style={{ marginLeft: "10px", fontSize: "1.2em" }}>
+                {userBalance}KLAY
+              </span>
             </UserContainer>
           ) : (
             <LoginBtn isLogin={isLogin} onClick={onLoginClick}>
