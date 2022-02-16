@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQrcode } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import Link from "next/link";
 
 const DEFAULT_QR_CODE = "DEFAULT";
 const DEFAULT_ADDRESS = "0x0000000000000000000000000000000000000000";
@@ -88,17 +89,11 @@ const Profile: NextPage = () => {
           </h1> */}
 
           <br />
-          <Btn
-            onClick={() => {
-              setQrOn(false);
-              dispatch(logout());
-              setQrvalue(DEFAULT_QR_CODE);
-              setAddress(DEFAULT_ADDRESS);
-              setBalance(DEFAULT_BALANCE);
-            }}
-          >
-            로그아웃
-          </Btn>
+          <Link href="/market">
+            <a>
+              <Btn>마켓 둘러보기</Btn>
+            </a>
+          </Link>
         </>
       ) : (
         <>

@@ -3,6 +3,19 @@ import axios from "axios";
 const A2A_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "cassoPi";
 
+const getKlipAccessUrl = (method: string, request_key: string) => {
+  if (method === "QR")
+    return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+
+  if (method === "iOS")
+    return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+
+  if (method === "android")
+    return `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`;
+
+  return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+};
+
 export const buyCard = async (
   tokenId: number,
   price: number,
@@ -68,8 +81,12 @@ export const getAddress = (
     })
     .then((response) => {
       const { request_key } = response.data;
-      const qrcode = `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-      setQrvalue(qrcode);
+      const isMobile = window.screen.width >= 1280 ? false : true;
+      if (isMobile) {
+        window.location.href = getKlipAccessUrl("android", request_key);
+      } else {
+        setQrvalue(getKlipAccessUrl("QR", request_key));
+      }
       let timerId = setInterval(() => {
         axios
           .get(
@@ -109,8 +126,13 @@ export const executeContract = (
     })
     .then((response) => {
       const { request_key } = response.data;
-      const qrcode = `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-      setQrvalue(qrcode);
+      const isMobile = window.screen.width >= 1280 ? false : true;
+      if (isMobile) {
+        window.location.href = getKlipAccessUrl("android", request_key);
+      } else {
+        setQrvalue(getKlipAccessUrl("QR", request_key));
+      }
+
       let timerId = setInterval(() => {
         axios
           .get(
