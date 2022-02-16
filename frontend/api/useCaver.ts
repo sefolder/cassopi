@@ -144,7 +144,12 @@ export const fetchNFTInfo = async (tokenId: any) => {
   const response = await axios.get(metadataUrl);
   const uriJSON = response.data;
 
-  const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+  let imageurl;
+    if(uriJSON.image.slice(7) == "ipfs://") {
+      imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+    } else {
+      imageurl = uriJSON.image;
+    }
 
   return {
     image: imageurl,
