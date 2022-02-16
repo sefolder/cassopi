@@ -30,7 +30,7 @@ const InnerContainer = styled.div`
   width: 1080px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 50px;
 
   display: flex;
   justify-content: space-between;
@@ -272,14 +272,17 @@ const NavBar = () => {
               <span style={{ paddingLeft: "10px" }}>cassoPi</span>
             </HomeLink>
           </Link>
-          <div>abcdefg</div>
+          <span>유명 예술가를 꿈꾸는 이들을 위하여</span>
           {/* <SearchForm onSubmit={onSearchSubmit}>
             <SearchInput placeholder="cassoPi에서 검색..." {...searchInput} />
             <SearchBtn>
               <Image src={searchIcon} alt="search" />
             </SearchBtn>
           </SearchForm> */}
-          <NavList>
+          
+        </NavBarLeft>
+        <NavBarRight>
+        <NavList>
             {navList.map(({ id, pathname, name }) => (
               <NavLi key={id}>
                 <Link passHref href={pathname}>
@@ -290,8 +293,6 @@ const NavBar = () => {
               </NavLi>
             ))}
           </NavList>
-        </NavBarLeft>
-        <NavBarRight>
           {isLogin ? (
             <UserContainer>
               <Link href="/profile" passHref>
