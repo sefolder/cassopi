@@ -43,25 +43,31 @@ const Creater = styled.span`
   margin: 5px 0px;
 `;
 
-const NFTCard = ({
-  artId,
-  image,
-  price,
-  width,
-}: {
-  artId: number;
+interface Imetadata {
+  name: string;
+  description: string;
+  attributes: any;
+}
+interface Infts {
+  id: number;
   image: string;
-  price: number;
-  width?: number;
-}) => (
-  <Link href={"/market/[artId]"} as={`/market/${artId}`}>
+  metadata: Imetadata;
+}
+
+const NFTCard = ({ price, nftInfo }: { price: number; nftInfo: Infts }) => (
+  <Link href={"/market/[artId]"} as={`/market/${nftInfo.id}`}>
     <a>
       <Container>
         <NFTWrapper>
-          <CardImage src={image} alt="artId" layout="fill" objectFit="cover" />
+          <CardImage
+            src={nftInfo.image}
+            alt="artId"
+            layout="fill"
+            objectFit="cover"
+          />
         </NFTWrapper>
         <InfoWrapper>
-          <NFTName>NFT제목</NFTName>
+          <NFTName>{nftInfo.metadata.name}</NFTName>
           <Creater>심윤보</Creater>
           <Price>{price} KLAY</Price>
         </InfoWrapper>

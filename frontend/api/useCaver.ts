@@ -121,6 +121,8 @@ export const fetchNFTIds = async (address: any) => {
   return tokenIds;
 };
 
+
+
 export const fetchNFTInfo = async (tokenId: any) => {
   const metadataUrl = await NFTContract.methods.tokenURI(tokenId).call();
   const response = await axios.get(metadataUrl);
@@ -128,5 +130,12 @@ export const fetchNFTInfo = async (tokenId: any) => {
 
   const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
 
-  return imageurl;
+  return {
+    image: imageurl,
+    metadata: {
+      name: String(uriJSON.name),
+      description: String(uriJSON.description),
+      attributes: uriJSON.attributes,
+    },
+  };
 };
