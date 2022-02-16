@@ -13,6 +13,12 @@ const Header = styled.div`
   display: flex;
 `;
 
+const AddressSpan = styled.span`
+  font-size: 1rem;
+  color: gray;
+  margin-top: 5px;
+`
+
 const BalanceContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,7 +35,7 @@ const BalanceContainer = styled.div`
 `;
 
 const Info: NextPage = () => {
-  const isLogin = useAppSelector((state) => state.user.isLogin);
+  //const isLogin = useAppSelector((state) => state.user.isLogin);
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
 
@@ -37,6 +43,9 @@ const Info: NextPage = () => {
     <>
       <Title>회원정보</Title>
       <Greeting>{"username"}님, 안녕하세요</Greeting>
+      <br/>
+      <AddressSpan>My Address <br/></AddressSpan>
+      <AddressSpan>{userAddress}</AddressSpan>
 
       <Header>
         <BalanceContainer>

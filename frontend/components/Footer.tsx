@@ -27,6 +27,16 @@ const LinkLi = styled.li`
   }
 `;
 
+const InfoText = styled.span`
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+
+  strong{
+    font-size: 15px;
+  }
+`
+
 const CopyText = styled.span`
   font-size: 13px;
   font-weight: 300;
@@ -35,7 +45,7 @@ const CopyText = styled.span`
 
 const Footer = () => (
   <Container>
-    <Links>
+    {/* <Links>
       {footerList.map(({ id, pathname, name }) => (
         <LinkLi key={id}>
           <Link href={pathname}>
@@ -43,7 +53,11 @@ const Footer = () => (
           </Link>
         </LinkLi>
       ))}
-    </Links>
+    </Links> */}
+    <InfoText>
+      <strong>Team SeFolder</strong> | 문의 <a href="https://open.kakao.com/o/srxUQhXd" target="_blank" >https://open.kakao.com/o/srxUQhXd</a> | 경기도 수원시 서부로 2066 성균관대학교 반도체관
+
+    </InfoText>
     <CopyText>&copy; 2022 cassoPi. All Rights Reserved.</CopyText>
   </Container>
 );

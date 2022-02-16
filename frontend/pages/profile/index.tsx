@@ -19,8 +19,42 @@ const Container = styled.div`
   }
 `;
 
-const CardsContainer = styled.div`
+const Greeting = styled.h1`
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 20px;
+`;
+
+const Header = styled.div`
   display: flex;
+`;
+
+const AddressSpan = styled.span`
+  font-size: 1rem;
+  color: gray;
+  margin-top: 5px;
+`
+
+const BalanceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 30px 30px 30px 0px;
+
+  div {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  span {
+    color: gray;
+  }
+`;
+
+const CardsContainer = styled.div`
+  padding: 20px;
+  border-radius: 30px 30px 30px 30px;
+  display: flex;
+  background-color: #8cd6c7;
 `;
 
 const ModalBody = styled.div`
@@ -103,7 +137,24 @@ const UserCollection: NextPage = () => {
 
   return (
     <Container>
-      <Title>콜렉션</Title>
+      <Title>내 프로필</Title>
+
+      <Greeting>{"username"}님, 안녕하세요</Greeting>
+      <br/>
+      <AddressSpan>My Address <br/></AddressSpan>
+      <AddressSpan>{userAddress}</AddressSpan>
+
+      <Header>
+        <BalanceContainer>
+          <span>Balance</span>
+          <div>{userBalance} KLAY</div>
+        </BalanceContainer>
+        <BalanceContainer>
+          <span>Royalty</span>
+          <div>0 KLAY</div>
+        </BalanceContainer>
+      </Header>
+
       <h1>내 콜렉션</h1>
 
       <Modal

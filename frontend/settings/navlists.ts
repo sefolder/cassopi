@@ -10,9 +10,10 @@ export const navList: INavlist[] = [
 ];
 
 export const userNavList: INavlist[] = [
-  { id: 1, pathname: "/profile", name: "내 콜렉션" },
-  { id: 2, pathname: "/profile/info", name: "회원정보" },
-  { id: 3, pathname: "/profile/edit", name: "회원정보수정" },
+  { id: 1, pathname: "/profile", name: "내 프로필" },
+  // { id: 1, pathname: "/profile", name: "내 콜렉션" },
+  // { id: 2, pathname: "/profile/info", name: "회원정보" },
+  // { id: 3, pathname: "/profile/edit", name: "회원정보수정" },
 ];
 
 export const userOnlyList: string[] = [
