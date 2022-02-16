@@ -124,7 +124,7 @@ const Home: NextPage = () => {
       </BannerContainer> */}
       <br />
       <br />
-      <Bigtxt>이번달 주목할 NFT</Bigtxt> <br />
+      <Bigtxt>이번달 신인 인기 작품</Bigtxt> <br />
       <NFT1Container>
         <Square
           style={{
