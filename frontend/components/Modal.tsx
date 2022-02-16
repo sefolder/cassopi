@@ -58,7 +58,7 @@ const Modal = ({
   };
 
   const modalContent = show ? (
-    <ModalOverlay onClick={handleCloseClick}>
+    <ModalOverlay>
       <ModalContainer>
         <ModalHeader>
           {title && <div>{title}</div>}

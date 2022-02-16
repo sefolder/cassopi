@@ -33,7 +33,7 @@ const AddressSpan = styled.span`
   font-size: 1rem;
   color: gray;
   margin-top: 5px;
-`
+`;
 
 const BalanceContainer = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ const BalanceContainer = styled.div`
 
 const CardsContainer = styled.div`
   padding: 20px;
-  border-radius: 30px 30px 30px 30px;
+  border-radius: 20px;
   display: flex;
   background-color: #8cd6c7;
 `;
@@ -69,6 +69,7 @@ const Button = styled.div`
   border-radius: 5px;
   margin-top: 10px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
 `;
 
 interface Imetadata {
@@ -129,6 +130,7 @@ const UserCollection: NextPage = () => {
     displayCard(userAddress, nftInfo.id, setQrvalue, (result) => {
       alert(JSON.stringify(result));
     });
+    setModal(false);
   };
 
   useEffect(() => {
@@ -140,8 +142,10 @@ const UserCollection: NextPage = () => {
       <Title>내 프로필</Title>
 
       <Greeting>{"username"}님, 안녕하세요</Greeting>
-      <br/>
-      <AddressSpan>My Address <br/></AddressSpan>
+      <br />
+      <AddressSpan>
+        My Address <br />
+      </AddressSpan>
       <AddressSpan>{userAddress}</AddressSpan>
 
       <Header>
@@ -156,7 +160,24 @@ const UserCollection: NextPage = () => {
       </Header>
 
       <h1>내 콜렉션</h1>
-
+      {nfts.length ? (
+        <CardsContainer>
+          {nfts.map((nft, index) => (
+            <CollectionCard
+              key={`nft${nft.id}`}
+              nftInfo={nft}
+              onClick={() => {
+                console.log("nftInfo to cardscontainer is ", nft);
+                setModal(true);
+                setNftInfo(nft);
+                setQrvalue("DEFAULT");
+              }}
+            ></CollectionCard>
+          ))}
+        </CardsContainer>
+      ) : (
+        <>보유한 NFT가 없습니다</>
+      )}
       <Modal
         show={modal}
         onClose={() => setModal(false)}
@@ -181,24 +202,6 @@ const UserCollection: NextPage = () => {
           {qrvalue !== "DEFAULT" ? <QRCode value={qrvalue} /> : null}
         </ModalBody>
       </Modal>
-      {nfts.length ? (
-        <CardsContainer>
-          {nfts.map((nft, index) => (
-            <CollectionCard
-              key={`nft${nft.id}`}
-              nftInfo={nft}
-              onClick={() => {
-                console.log("nftInfo to cardscontainer is ", nft);
-                setModal(true);
-                setNftInfo(nft);
-                setQrvalue("DEFAULT");
-              }}
-            ></CollectionCard>
-          ))}
-        </CardsContainer>
-      ) : (
-        <>보유한 NFT가 없습니다</>
-      )}
     </Container>
   );
 };
