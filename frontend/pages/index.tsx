@@ -120,7 +120,7 @@ const Home: NextPage = () => {
       </BannerContainer>
       <br />
       <br />
-      <Bigtxt>이번주 NFT 판매 순위</Bigtxt> <br />
+      <Bigtxt>이번달 주목할 NFT</Bigtxt> <br />
       <NFT1Container>
         <Square style={{ width: "340px", height: "340px", overflow:'hidden', gridColumn: "1 / 3", gridRow: "1 / 3" }}>
           <CardImage
