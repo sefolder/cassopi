@@ -6,6 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 const ModalBody = styled.div`
   padding-top: 10px;
   overflow-y: hidden;
+  max-width: 700px;
 `;
 
 const ModalHeader = styled.div`
