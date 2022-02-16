@@ -30,7 +30,7 @@ const Container = styled.div`
 
 const NFTContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(250px, auto);
   height: 100%;
 `;
@@ -47,23 +47,25 @@ interface Infts {
 }
 
 const Market: NextPage = () => {
-  const [nfts, setNfts] = useState<Infts[]>([{
-    id: 0,
-    image: "",
-    metadata: {
-      name: "",
-      description: "",
-      attributes: [],
+  const [nfts, setNfts] = useState<Infts[]>([
+    {
+      id: 0,
+      image: "",
+      metadata: {
+        name: "",
+        description: "",
+        attributes: [],
+      },
     },
-  }]);
+  ]);
 
   const fetchMarketNFTs = async () => {
     const _nfts = await fetchCardsOf(process.env.NEXT_PUBLIC_MARKET_CONTRACT);
 
-    for (let i=0; i<_nfts.length; i++){
+    for (let i = 0; i < _nfts.length; i++) {
       _nfts[i].id = Number(_nfts[i].id);
     }
-    
+
     console.log("_nfts is ", _nfts);
     setNfts(_nfts);
   };
@@ -85,9 +87,8 @@ const Market: NextPage = () => {
               nft.image.length > 0 && (
                 <NFTCard
                   key={`NFT${nft.id}`}
-                  artId={nft.id}
-                  image={nft.image}
                   price={0.01}
+                  nftInfo={nft}
                 ></NFTCard>
               )
           )}

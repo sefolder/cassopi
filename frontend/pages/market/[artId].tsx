@@ -16,6 +16,7 @@ const TextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  margin-bottom: 200px;
 `;
 
 const NFTContainer = styled.div`
@@ -100,6 +101,16 @@ const PriceLabel = styled.div`
   height: 20px;
 `;
 
+interface Imetadata {
+  name: string;
+  description: string;
+  attributes: any;
+}
+interface Infts {
+  image: string;
+  metadata: Imetadata;
+}
+
 const Art: NextPage = () => {
   const {
     query: { artId },
@@ -110,6 +121,14 @@ const Art: NextPage = () => {
   const userBalance = useAppSelector((state) => state.user.userBalance);
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const [uri, setUri] = useState("");
+  const [nftInfo, setMetadata] = useState({
+    image: "",
+    metadata: {
+      name: "",
+      description: "",
+      attributes: [],
+    },
+  });
 
   const BuyCard = () => {
     KlipAPI.buyCard(
@@ -124,7 +143,7 @@ const Art: NextPage = () => {
 
   useEffect(() => {
     (async () => {
-      if (artId) setUri(await fetchNFTInfo(artId as string));
+      if (artId) setMetadata(await fetchNFTInfo(artId as string));
     })();
   }, [artId]);
 
@@ -132,14 +151,19 @@ const Art: NextPage = () => {
     <>
       <Title>{artId}</Title>
       <NFTContainer>
-        {uri !== "" ? (
-          <Image src={uri} alt="NFT" layout="fill" objectFit="cover" />
+        {nftInfo.image !== "" ? (
+          <Image
+            src={nftInfo.image}
+            alt="NFT"
+            layout="fill"
+            objectFit="cover"
+          />
         ) : null}
       </NFTContainer>
       <TextWrapper>
         <InfoCWrapper>
           <TitleContainer>
-            <h1>NFT 제목</h1>
+            <h1>{nftInfo.metadata.name}</h1>
             <span>#{artId}</span>
           </TitleContainer>
           <ProfileContainer>
@@ -152,36 +176,7 @@ const Art: NextPage = () => {
             />
             <span>심윤보</span>
           </ProfileContainer>
-          <Descriptions>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </Descriptions>
+          <Descriptions>{nftInfo.metadata.description}</Descriptions>
         </InfoCWrapper>
         <PriceContainer>
           <div>

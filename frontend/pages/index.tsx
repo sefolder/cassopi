@@ -85,23 +85,25 @@ const Home: NextPage = () => {
   ]);
 
   //최근 올라온 NFT 리스트
-  const [nfts2, setNfts2] = useState<Infts[]>([{
-    id: 0,
-    image: "",
-    metadata: {
-      name: "",
-      description: "",
-      attributes: [],
+  const [nfts2, setNfts2] = useState<Infts[]>([
+    {
+      id: 1,
+      image: "",
+      metadata: {
+        name: "",
+        description: "",
+        attributes: [],
+      },
     },
-  }]);
+  ]);
 
   const fetchMarketNFTs = async () => {
     const _nfts = await fetchCardsOf(process.env.NEXT_PUBLIC_MARKET_CONTRACT);
 
-    for (let i=0; i<_nfts.length; i++){
+    for (let i = 0; i < _nfts.length; i++) {
       _nfts[i].id = Number(_nfts[i].id);
     }
-    
+
     console.log("_nfts is ", _nfts);
     setNfts2(_nfts);
   };
@@ -122,7 +124,15 @@ const Home: NextPage = () => {
       <br />
       <Bigtxt>이번주 NFT 판매 순위</Bigtxt> <br />
       <NFT1Container>
-        <Square style={{ width: "340px", height: "340px", overflow:'hidden', gridColumn: "1 / 3", gridRow: "1 / 3" }}>
+        <Square
+          style={{
+            width: "340px",
+            height: "340px",
+            overflow: "hidden",
+            gridColumn: "1 / 3",
+            gridRow: "1 / 3",
+          }}
+        >
           <CardImage
             src="rnj9.jpg"
             alt="artId"
@@ -131,7 +141,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="lsh3.jpg"
             alt="artId"
@@ -140,7 +150,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="lsh5.jpg"
             alt="artId"
@@ -149,7 +159,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="lsh4.jpeg"
             alt="artId"
@@ -158,7 +168,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="rnj6.jpg"
             alt="artId"
@@ -167,7 +177,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="rnj7.jpg"
             alt="artId"
@@ -176,7 +186,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="yjm1.jpg"
             alt="artId"
@@ -185,7 +195,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="hrw1.jpg"
             alt="artId"
@@ -194,7 +204,7 @@ const Home: NextPage = () => {
             objectFit="cover"
           />
         </Square>
-        <Square style={{ overflow:'hidden'}}>
+        <Square style={{ overflow: "hidden" }}>
           <CardImage
             src="syb2.jpg"
             alt="artId"
@@ -217,9 +227,8 @@ const Home: NextPage = () => {
               nft.image.length > 0 && (
                 <NFTCard
                   key={`NFT${nft.id}`}
-                  artId={nft.id}
-                  image={nft.image}
                   price={0.01}
+                  nftInfo={nft}
                 ></NFTCard>
               )
           )}
