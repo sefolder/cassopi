@@ -73,9 +73,9 @@ export const fetchCardsOf = async (address: any) => {
 
     const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
     tokenImages.push(imageurl);
-    
+
     const tempAttributes = [];
-    for (let j=0; j<uriJSON.attributes.length; j++){
+    for (let j = 0; j < uriJSON.attributes.length; j++) {
       tempAttributes.push(uriJSON.attributes[j]);
     }
     // tokenAttributes.push(tempAttributes);
@@ -83,10 +83,10 @@ export const fetchCardsOf = async (address: any) => {
     // tokenName.push(uriJSON.name);
 
     const tempMetadata = {
-      name:<string> "",
-      description:<string> "",
-      attributes:<any> [],
-    }
+      name: <string>"",
+      description: <string>"",
+      attributes: <any>[],
+    };
     tempMetadata.name = String(uriJSON.name);
     tempMetadata.description = String(uriJSON.description);
     tempMetadata.attributes = tempAttributes;
@@ -96,7 +96,11 @@ export const fetchCardsOf = async (address: any) => {
 
   const nfts = [];
   for (let i = 0; i < balance; i++) {
-    nfts.push({ image: tokenImages[i], id: tokenIds[i], metadata: tokenMetadata[i], });
+    nfts.push({
+      image: tokenImages[i],
+      id: tokenIds[i],
+      metadata: tokenMetadata[i],
+    });
   }
   console.log("nft", nfts);
 
@@ -118,6 +122,11 @@ export const fetchNFTIds = async (address: any) => {
 };
 
 export const fetchNFTInfo = async (tokenId: any) => {
-  const uri = await NFTContract.methods.tokenURI(tokenId).call();
-  return uri;
+  const metadataUrl = await NFTContract.methods.tokenURI(tokenId).call();
+  const response = await axios.get(metadataUrl);
+  const uriJSON = response.data;
+
+  const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+
+  return imageurl;
 };
