@@ -21,6 +21,10 @@ const Smalltxt = styled.div`
   color: darkgrey;
 `;
 
+const Container = styled.div`
+  text-align: center;
+`;
+
 const Card = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -139,12 +143,13 @@ const Create: NextPage = () => {
               <div
                 style={{ alignItems: "center", width: "90%", margin: "0 auto" }}
               >
-                <br/>
+                <br />
                 <input
                   //value={mintImageUrl}
                   onChange={(e) => {
                     console.log("new image: ", e.target.value);
-                    let tempURL = "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
+                    let tempURL =
+                      "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
                     console.log("tempURL = ", tempURL);
                     setMintImageUrl(tempURL);
                   }}
@@ -152,8 +157,8 @@ const Create: NextPage = () => {
                   placeholder="메타데이터 URI 주소를 입력해주세요"
                   style={{ alignItems: "center", width: "100%" }}
                 />
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <input
                   value={mintTokenID}
                   onChange={(e) => {
@@ -164,7 +169,7 @@ const Create: NextPage = () => {
                   placeholder="토큰 ID를 입력해주세요"
                   style={{ alignItems: "center", width: "100%" }}
                 />
-                배정된 Token ID 범위 : 1004100 ~ 1004199 <br/>
+                배정된 Token ID 범위 : 1004100 ~ 1004199 <br />
                 사용 완료 : 1004199, 1004198
               </div>
               <div style={{ display: "flex", alignItems: "center" }}>
@@ -180,7 +185,16 @@ const Create: NextPage = () => {
         </>
       ) : (
         <>
-          <h1>log in to use</h1>
+          <Container>
+            <a href="https://open.kakao.com/o/srxUQhXd">
+              <Image
+                src="/notice.png"
+                alt="minting_notice"
+                width={550}
+                height={700}
+              />
+            </a>
+          </Container>
         </>
       )}
     </>
