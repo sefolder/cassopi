@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { title } from "process";
 import { useEffect, useState } from "react";
-import { fetchCardsOf } from "../../api/useCaver";
+import { fetchCardsOf, getBalance } from "../../api/useCaver";
 import { displayCard } from "../../api/useKlip";
 import CollectionCard from "../../components/CollectionCard";
 import Modal from "../../components/Modal";
@@ -10,6 +10,7 @@ import QRCode from "qrcode.react";
 import { useAppDispatch, useAppSelector, useInput } from "../../settings/hooks";
 import styled from "styled-components";
 import Image from "next/image";
+import { setUserBalance } from "../../settings/slices/user";
 
 const Container = styled.div`
   h1 {
@@ -89,7 +90,7 @@ const UserCollection: NextPage = () => {
   //const userAddress = "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327"; //임시 주소
   const userAddress = useAppSelector((state) => state.user.userAddress);
   const userBalance = useAppSelector((state) => state.user.userBalance);
-
+  const dispatch = useAppDispatch();
   const [modal, setModal] = useState(false);
   const [nftInfo, setNftInfo] = useState<Infts>({
     id: 0,
@@ -134,13 +135,15 @@ const UserCollection: NextPage = () => {
   };
 
   useEffect(() => {
-    if (userAddress !== "0x0000000000") fetchMyNFTs();
+    if (userAddress !== "0x0000000000") {
+      fetchMyNFTs();
+      (async () => {
+        let _balance = await getBalance(userAddress);
+        dispatch(setUserBalance(_balance));
+      })();
+    }
     if (userAddress === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
-      setUsername("홍여원");
-    else if (userAddress === "0x3965ee847d44049d55b48fd7e4af8c11fd290d7b")
-      setUsername("심윤보");
-    else if (userAddress === "0x47cDA99Ffc42997A6C44C5A0a8392302dB421e38")
-      setUsername("유정민");
+      setUsername("Hong");
     else if (userAddress === "0x04eDD3CFE636cd7721c5C269C526f48E6c037A17")
       setUsername("sunny");
     else if (userAddress === "0x71b515c2aed4B59ccf93be7C1393C51228f0d89C")

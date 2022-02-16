@@ -63,17 +63,16 @@ const NFTCard = ({ price, nftInfo }: { price: number; nftInfo: Infts }) => {
     (async () => {
       const _seller = await getSeller(nftInfo.id);
       if (_seller === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
-        setSeller("홍여원");
-      else if (_seller === "0x3965ee847d44049d55b48fd7e4af8c11fd290d7b")
-        setSeller("심윤보");
-      else if (_seller === "0x47cDA99Ffc42997A6C44C5A0a8392302dB421e38")
-        setSeller("유정민");
+        setSeller("Hong");
       else if (_seller === "0x04eDD3CFE636cd7721c5C269C526f48E6c037A17")
         setSeller("sunny");
       else if (_seller === "0x71b515c2aed4B59ccf93be7C1393C51228f0d89C")
         setSeller("summer");
       else if (_seller === "0x746320b345a70969838279E2609b3F876d6a8898")
         setSeller("whybe");
+      else {
+        setSeller("user");
+      }
     })();
   }, []);
 
