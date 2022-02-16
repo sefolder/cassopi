@@ -148,10 +148,9 @@ const Create: NextPage = () => {
                   //value={mintImageUrl}
                   onChange={(e) => {
                     console.log("new image: ", e.target.value);
-                    let tempURL =
-                      "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
-                    console.log("tempURL = ", tempURL);
-                    setMintImageUrl(tempURL);
+                    // let tempURL =
+                    //   "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
+                    setMintImageUrl(e.target.value);
                   }}
                   type="text"
                   placeholder="메타데이터 URI 주소를 입력해주세요"
