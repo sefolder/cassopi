@@ -32,10 +32,10 @@ const InfoText = styled.span`
   font-weight: 400;
   color: white;
 
-  strong{
+  strong {
     font-size: 15px;
   }
-`
+`;
 
 const CopyText = styled.span`
   font-size: 13px;
@@ -55,8 +55,15 @@ const Footer = () => (
       ))}
     </Links> */}
     <InfoText>
-      <strong>Team SeFolder</strong> | 문의 <a href="https://open.kakao.com/o/srxUQhXd" target="_blank" >https://open.kakao.com/o/srxUQhXd</a> | 경기도 수원시 서부로 2066 성균관대학교 반도체관
-
+      <strong>Team SeFolder</strong> | 문의{" "}
+      <a
+        href="https://open.kakao.com/o/srxUQhXd"
+        target="_blank"
+        rel="noreferrer"
+      >
+        https://open.kakao.com/o/srxUQhXd
+      </a>{" "}
+      | 경기도 수원시 서부로 2066 성균관대학교 반도체관
     </InfoText>
     <CopyText>&copy; 2022 cassoPi. All Rights Reserved.</CopyText>
   </Container>

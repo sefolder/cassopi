@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { fetchCardsOf } from "../api/useCaver";
 import CollectionCard from "../components/CollectionCard";
 import NFTCard from "../components/NFTCard";
+import BannerSlider from "../components/BannerSlider";
 
 const BannerContainer = styled.div`
   //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -115,11 +116,12 @@ const Home: NextPage = () => {
   return (
     <>
       <Title>홈</Title>
-      <BannerContainer>
+      <BannerSlider />
+      {/* <BannerContainer>
         <a href={eventURL} target="_blank" rel="noreferrer">
           <Banner src={BannerURL} />
         </a>
-      </BannerContainer>
+      </BannerContainer> */}
       <br />
       <br />
       <Bigtxt>이번주 NFT 판매 순위</Bigtxt> <br />
