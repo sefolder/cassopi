@@ -2,6 +2,7 @@ import axios from "axios";
 import Caver from "caver-js";
 import { AbiItem } from "caver-js/types/packages/caver-utils/src";
 import KIP17ABI from "../abi/KIP17TokenABI.json";
+import MarketABI from "../abi/MarketABI.json";
 
 const ACCESS_KEY_ID = process.env.NEXT_PUBLIC_ACCESS_KEY_ID;
 const SECRET_ACCESS_KEY = process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY;
@@ -40,6 +41,17 @@ const NFTContract = new caver.contract(
   KIP17ABI as AbiItem[],
   process.env.NEXT_PUBLIC_BETA_CONTRACT
 );
+
+const MarketContract = new caver.contract(
+  MarketABI as AbiItem[],
+  process.env.NEXT_PUBLIC_MARKET_CONTRACT
+);
+
+export const getSeller = async (tokenId: number) => {
+  const seller = await MarketContract.methods.seller(tokenId).call();
+
+  return seller;
+};
 
 export const fetchCardsOf = async (address: any) => {
   // fetch balance
@@ -120,8 +132,6 @@ export const fetchNFTIds = async (address: any) => {
 
   return tokenIds;
 };
-
-
 
 export const fetchNFTInfo = async (tokenId: any) => {
   const metadataUrl = await NFTContract.methods.tokenURI(tokenId).call();
