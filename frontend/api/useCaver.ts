@@ -83,12 +83,7 @@ export const fetchCardsOf = async (address: any) => {
     console.log("response is ", response);
     const uriJSON = response.data;
 
-    let imageurl;
-    if(uriJSON.image.slice(7) == "ipfs://") {
-      imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
-    } else {
-      imageurl = uriJSON.image;
-    }
+    const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
     
     tokenImages.push(imageurl);
 
@@ -144,12 +139,7 @@ export const fetchNFTInfo = async (tokenId: any) => {
   const response = await axios.get(metadataUrl);
   const uriJSON = response.data;
 
-  let imageurl;
-    if(uriJSON.image.slice(7) == "ipfs://") {
-      imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
-    } else {
-      imageurl = uriJSON.image;
-    }
+  const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
 
   return {
     image: imageurl,
