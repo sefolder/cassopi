@@ -137,10 +137,10 @@ const UserCollection: NextPage = () => {
   useEffect(() => {
     if (userAddress !== "0x0000000000") {
       fetchMyNFTs();
-      (async () => {
-        let _balance = await getBalance(userAddress);
-        dispatch(setUserBalance(_balance));
-      })();
+      //(async () => {
+      //  let _balance = await getBalance(userAddress);
+      //  dispatch(setUserBalance(_balance));
+      //})();
     }
     if (userAddress === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327")
       setUsername("ryeowon");
