@@ -93,7 +93,8 @@ const Create: NextPage = () => {
   return (
     <>
       <Title>Create</Title>
-      {userAddress === "0x3965ee847d44049d55b48fd7e4af8c11fd290d7b" ? (
+      {userAddress === "0x3965ee847d44049d55b48fd7e4af8c11fd290d7b" ||
+      userAddress === "0x2bc2C46165b64A3AF6A257B9fF882A1f7BeBc327" ? (
         <>
           {qrvalue !== "DEFAULT" ? (
             <div
