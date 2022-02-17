@@ -55,8 +55,9 @@ export const getSeller = async (tokenId: number) => {
 
 export const fetchCardsOf = async (address: any) => {
   // fetch balance
-  const balance = await NFTContract.methods.balanceOf(address).call();
+  let balance = await NFTContract.methods.balanceOf(address).call();
   console.log("Balance", balance);
+  if (balance > 3) balance = 3;
 
   // fetch token IDs
   const tokenIds = [];
@@ -77,7 +78,7 @@ export const fetchCardsOf = async (address: any) => {
   //   const id = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> image 주소
   //   tokenUris.push(id);
   // }
-  for (let i = 0; i < (balance > 3 ? 3 : balance); i++) {
+  for (let i = 0; i < balance; i++) {
     const metadataUrl = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
     const response = await axios.get(metadataUrl); // 실제 메타데이터
     console.log("response is ", response);
