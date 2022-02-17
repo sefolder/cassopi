@@ -162,6 +162,8 @@ const Art: NextPage = () => {
           setSeller("summer");
         else if (_seller === "0x746320b345a70969838279E2609b3F876d6a8898")
           setSeller("whybe");
+        else if (_seller === "0x1dC2d87790b33464d0FaEcD5d1a9f50E58fb8790")
+          setSeller("seongwon");
       }
     })();
   }, [artId]);

@@ -150,6 +150,8 @@ const UserCollection: NextPage = () => {
       setUsername("summer");
     else if (userAddress === "0x746320b345a70969838279E2609b3F876d6a8898")
       setUsername("whybe");
+    else if (userAddress === "0x1dC2d87790b33464d0FaEcD5d1a9f50E58fb8790")
+      setUsername("seongwon");
     else setUsername("사용자");
   }, [userAddress]);
 
