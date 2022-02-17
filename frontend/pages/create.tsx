@@ -150,7 +150,7 @@ const Create: NextPage = () => {
                   onChange={(e) => {
                     console.log("new image: ", e.target.value);
                     let tempURL =
-                      "https://ipfs.io/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
+                      "https://cassopigateway.mypinata.cloud/ipfs/" + e.target.value.slice(7); //delete "ipfs://"
                     console.log("tempURL = ", tempURL);
                     setMintImageUrl(tempURL);
                   }}
