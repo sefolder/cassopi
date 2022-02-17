@@ -84,7 +84,7 @@ export const getAddress = (
       const { request_key } = response.data;
       const isMobile = window.screen.width >= 1280 ? false : true;
       if (isMobile) {
-        window.location.href = getKlipAccessUrl("android", request_key);
+        window.location.href = getKlipAccessUrl("iOS", request_key);
       } else {
         setQrvalue(getKlipAccessUrl("QR", request_key));
       }
@@ -129,7 +129,7 @@ export const executeContract = (
       const { request_key } = response.data;
       const isMobile = window.screen.width >= 1280 ? false : true;
       if (isMobile) {
-        window.location.href = getKlipAccessUrl("android", request_key);
+        window.location.href = getKlipAccessUrl("iOS", request_key);
       } else {
         setQrvalue(getKlipAccessUrl("QR", request_key));
       }

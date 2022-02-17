@@ -77,15 +77,16 @@ export const fetchCardsOf = async (address: any) => {
   //   const id = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> image 주소
   //   tokenUris.push(id);
   // }
-  for (let i = 0; i < balance; i++) {
+  for (let i = 0; i < (balance > 3 ? 3 : balance); i++) {
     const metadataUrl = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
     const response = await axios.get(metadataUrl); // 실제 메타데이터
     console.log("response is ", response);
     const uriJSON = response.data;
 
     //const imageurl = "https://ipfs.io/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
-    const imageurl = "https://cassopigateway.mypinata.cloud/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
-    
+    const imageurl =
+      "https://cassopigateway.mypinata.cloud/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+
     tokenImages.push(imageurl);
 
     const tempAttributes = [];
@@ -140,7 +141,8 @@ export const fetchNFTInfo = async (tokenId: any) => {
   const response = await axios.get(metadataUrl);
   const uriJSON = response.data;
 
-  const imageurl = "https://cassopigateway.mypinata.cloud/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
+  const imageurl =
+    "https://cassopigateway.mypinata.cloud/ipfs/" + uriJSON.image.slice(7); //delete "ipfs://"
 
   return {
     image: imageurl,
