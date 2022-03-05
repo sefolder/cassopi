@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import * as ga from '../lib/ga';
+import * as ga from '../lib/gtag';
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,25 +40,26 @@ const BannerSlider = () => {
   const freeKlayBannerClick = () => {
     ga.event({
       action: "banner click",
-      params : {
-        banner_type: "free klay"
-      }
+      category: "banner",
+      label: "freeklay",
+      value: "",
     })
+    console.log("free klay banner clicked");
   }
   const homeBannerClick = () => {
     ga.event({
       action: "banner click",
-      params : {
-        banner_type: "home"
-      }
+      category: "banner",
+      label: "home",
+      value: "",
     })
   }
   const designerBannerClick = () => {
     ga.event({
       action: "banner click",
-      params : {
-        banner_type: "designer"
-      }
+      category: "banner",
+      label: "designer",
+      value: "",
     })
   }
 
@@ -101,7 +102,7 @@ const BannerSlider = () => {
             href="https://forms.gle/wrKpeSLqEtb6txRv7"
             target="_blank"
             rel="noreferrer"
-            onClick={() => freeKlayBannerClick}
+            onClick={() => freeKlayBannerClick()}
           >
             <Image
               src="surveyandfreeklay_banner.png"
@@ -114,7 +115,7 @@ const BannerSlider = () => {
             href="https://forms.gle/L5AerRzfDMzDfZfbA"
             target="_blank"
             rel="noreferrer"
-            onClick={() => homeBannerClick}
+            onClick={() => homeBannerClick()}
           >
             <Image
               src="home_banner_cropped.png"
@@ -127,7 +128,7 @@ const BannerSlider = () => {
             href="https://forms.gle/hSvDZk2jmDKWRQ5V9"
             target="_blank"
             rel="noreferrer"
-            onClick={() => designerBannerClick}
+            onClick={() => designerBannerClick()}
           >
             <Image
               src="designer_banner_cropped.png"

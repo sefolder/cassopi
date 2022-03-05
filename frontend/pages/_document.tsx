@@ -8,7 +8,6 @@ import Document, {
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
-// process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -52,8 +51,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+            async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
           />
           <script
             dangerouslySetInnerHTML={{
@@ -65,6 +63,7 @@ class MyDocument extends Document {
                   page_path: window.location.pathname,
                 });
               `,
+
             }}
           />
         </Head>

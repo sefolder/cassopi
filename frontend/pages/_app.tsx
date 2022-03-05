@@ -6,14 +6,14 @@ import { store } from "../settings/store";
 import { useEffect } from "react";
 import { useRouter } from 'next/router';
 
-import * as ga from '../lib/ga';
+import * as gtag from '../lib/gtag';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
   useEffect(() => {
     const handleRouteChange = (url: any) => {
-      ga.pageview(url);
+      gtag.pageview(url);
     };
     //When the component is mounted, subscribe to router changes
     //and log those page views
