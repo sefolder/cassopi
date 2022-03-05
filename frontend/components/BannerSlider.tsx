@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
+import * as ga from '../lib/ga';
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -34,6 +36,32 @@ const PrevButton = styled.button`
 `;
 
 const BannerSlider = () => {
+
+  const freeKlayBannerClick = () => {
+    ga.event({
+      action: "banner click",
+      params : {
+        banner_type: "free klay"
+      }
+    })
+  }
+  const homeBannerClick = () => {
+    ga.event({
+      action: "banner click",
+      params : {
+        banner_type: "home"
+      }
+    })
+  }
+  const designerBannerClick = () => {
+    ga.event({
+      action: "banner click",
+      params : {
+        banner_type: "designer"
+      }
+    })
+  }
+
   const TOTAL_SLIDES = 3; //0 ~ 2
   const [currentSlide, setCurrentSlide] = useState(0);
   let slideRef = useRef<any>();
@@ -69,9 +97,11 @@ const BannerSlider = () => {
             height={650}
           />
           <a
+            id="serviceopen_banner"
             href="https://forms.gle/wrKpeSLqEtb6txRv7"
             target="_blank"
             rel="noreferrer"
+            onClick={() => freeKlayBannerClick}
           >
             <Image
               src="surveyandfreeklay_banner.png"
@@ -84,6 +114,7 @@ const BannerSlider = () => {
             href="https://forms.gle/L5AerRzfDMzDfZfbA"
             target="_blank"
             rel="noreferrer"
+            onClick={() => homeBannerClick}
           >
             <Image
               src="home_banner_cropped.png"
@@ -96,6 +127,7 @@ const BannerSlider = () => {
             href="https://forms.gle/hSvDZk2jmDKWRQ5V9"
             target="_blank"
             rel="noreferrer"
+            onClick={() => designerBannerClick}
           >
             <Image
               src="designer_banner_cropped.png"
