@@ -1,6 +1,7 @@
 import axios from "axios";
 import Caver from "caver-js";
 import { AbiItem } from "caver-js/types/packages/caver-utils/src";
+import { time } from "console";
 import KIP17ABI from "../abi/KIP17TokenABI.json";
 import MarketABI from "../abi/MarketABI.json";
 
@@ -57,7 +58,7 @@ export const fetchCardsOf = async (address: any) => {
   // fetch balance
   let balance = await NFTContract.methods.balanceOf(address).call();
   console.log("Balance", balance);
-  if (balance > 3) balance = 3;
+  
 
   // fetch token IDs
   const tokenIds = [];
@@ -67,7 +68,7 @@ export const fetchCardsOf = async (address: any) => {
   }
 
   console.log(tokenIds);
-
+  //if (balance > 3) balance = 3;
   const tokenMetadata = [];
   const tokenDescriptions = [];
   const tokenName = [];
@@ -78,6 +79,9 @@ export const fetchCardsOf = async (address: any) => {
   //   const id = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> image 주소
   //   tokenUris.push(id);
   // }
+
+  const timer = (ms: number | undefined) => new Promise(res => setTimeout(res, ms))
+
   for (let i = 0; i < balance; i++) {
     const metadataUrl = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
     const response = await axios.get(metadataUrl); // 실제 메타데이터
@@ -107,6 +111,7 @@ export const fetchCardsOf = async (address: any) => {
     tempMetadata.description = String(uriJSON.description);
     tempMetadata.attributes = tempAttributes;
     tokenMetadata.push(tempMetadata);
+    //await timer(1000);
   }
   console.log("tokenMetadata is ", tokenMetadata);
 
