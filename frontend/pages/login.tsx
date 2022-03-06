@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Image from "next/image";
 import Title from "../components/Title";
 import { useState } from "react";
 import QRCode from "qrcode.react";
@@ -46,6 +47,7 @@ const Btn = styled.button`
   font-size: 14px;
   padding: 13px;
   margin-top: 30px;
+  margin-bottom: 150px;
   transition: opacity 0.1s ease-in-out;
   display: flex;
   justify-content: center;
@@ -124,6 +126,12 @@ const Profile: NextPage = () => {
             <Icon icon={faQrcode} />
             {qrOn ? <>로그인 QR 코드 다시 받기</> : <>로그인 QR 코드 받기</>}
           </Btn>
+          <Image
+            src="login_guide.png"
+            alt="login guide image"
+            width={780}
+            height={400}
+          />
         </>
       )}
     </Container>
