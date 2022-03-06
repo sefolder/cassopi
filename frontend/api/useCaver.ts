@@ -80,10 +80,8 @@ export const fetchCardsOf = async (address: any) => {
   //   tokenUris.push(id);
   // }
 
-  const timer = (ms: number | undefined) => new Promise(res => setTimeout(res, ms))
-
   for (let i = 0; i < balance; i++) {
-    const metadataUrl = await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
+    const metadataUrl = "https://cassopigateway.mypinata.cloud/ipfs/" + await NFTContract.methods.tokenURI(tokenIds[i]).call(); // -> metadata 주소
     const response = await axios.get(metadataUrl); // 실제 메타데이터
     console.log("response is ", response);
     const uriJSON = response.data;
@@ -111,7 +109,6 @@ export const fetchCardsOf = async (address: any) => {
     tempMetadata.description = String(uriJSON.description);
     tempMetadata.attributes = tempAttributes;
     tokenMetadata.push(tempMetadata);
-    //await timer(1000);
   }
   console.log("tokenMetadata is ", tokenMetadata);
 
@@ -143,7 +140,7 @@ export const fetchNFTIds = async (address: any) => {
 };
 
 export const fetchNFTInfo = async (tokenId: any) => {
-  const metadataUrl = await NFTContract.methods.tokenURI(tokenId).call();
+  const metadataUrl = "https://cassopigateway.mypinata.cloud/ipfs/" + await NFTContract.methods.tokenURI(tokenId).call();
   const response = await axios.get(metadataUrl);
   const uriJSON = response.data;
 

@@ -56,6 +56,7 @@ const CardsContainer = styled.div`
   border-radius: 20px;
   display: flex;
   background-color: #8cd6c7;
+  flex-wrap: wrap;
 `;
 
 const ModalBody = styled.div`
@@ -188,18 +189,23 @@ const UserCollection: NextPage = () => {
       <h1>내 콜렉션</h1>
       {nfts.length ? (
         <CardsContainer>
-          {nfts.map((nft, index) => (
-            <CollectionCard
-              key={`nft${nft.id}`}
-              nftInfo={nft}
-              onClick={() => {
-                console.log("nftInfo to cardscontainer is ", nft);
-                setModal(true);
-                setNftInfo(nft);
-                setQrvalue("DEFAULT");
-              }}
-            ></CollectionCard>
-          ))}
+          {nfts.map((nft, index) => {
+            if (nft.id === 0) {
+              return <>NFT를 불러오고 있습니다.</>
+            }
+            return (
+              <CollectionCard
+                key={`nft${nft.id}`}
+                nftInfo={nft}
+                onClick={() => {
+                  console.log("nftInfo to cardscontainer is ", nft);
+                  setModal(true);
+                  setNftInfo(nft);
+                  setQrvalue("DEFAULT");
+                }}
+              ></CollectionCard>
+            )
+          })}
         </CardsContainer>
       ) : (
         <>보유한 NFT가 없습니다</>

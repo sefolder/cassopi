@@ -8,6 +8,7 @@ const Container = styled.div`
   cursor: pointer;
   margin: 1vw;
   margin-left: 0;
+  //min-width: 200px;
 `;
 
 const CardImage = styled(Image)`
@@ -38,8 +39,8 @@ const CollectionCard = ({
         <CardImage
           src={nftInfo.image}
           alt={`NFT${nftInfo.id}`}
-          width={200}
-          height={200}
+          width={241}
+          height={241}
           objectFit="cover"
         ></CardImage>
         <br />
