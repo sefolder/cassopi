@@ -33,7 +33,7 @@ export const userSlice = createSlice({
       state.isLogin = true;
       //state.userName = 백엔드에서 address별로 저장된 닉네임 가져오기
       state.userAddress = action.payload.userAddress;
-
+      state.userBalance = action.payload.userBalance;
       const cookies = new Cookies();
       if (!cookies.get("userInfo")) {
         // react-cookie에서는 JSON.stringify()/parse()를 해줄 필요가 없음
