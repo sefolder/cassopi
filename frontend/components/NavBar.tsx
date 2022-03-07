@@ -12,6 +12,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../settings/slices/user";
 
+// > 1080 : desktop
+// > 800 : tablet
+// > 480 : phone
+
+
 const Container = styled.div`
   width: 100%;
   height: ${(props) => props.theme.navBarHeight};
@@ -35,6 +40,23 @@ const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1080px) {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+  }
+  @media (max-width: 860px) {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+  }
+  /* @media (max-width: 480px) {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+  } */
+
 `;
 
 const NavBarLeft = styled.div`
@@ -57,6 +79,27 @@ const TempLogo = styled.div`
   border-radius: 50%;
   margin-right: 10px;
 `;
+
+const Subtitle = styled.span`
+  visibility: visible;
+  @media (max-width: 1080px) {
+
+  }
+  @media (max-width: 860px) {
+    visibility: hidden;
+  }
+`
+
+const KlayWord = styled.span`
+  margin-left: 10px;
+  font-size: 1.2em;
+  @media (max-width: 1080px) {
+    font-size: 1em;
+  }
+  @media (max-width: 860px) {
+    
+  }
+`
 
 const HomeLink = styled.a`
   height: inherit;
@@ -272,7 +315,7 @@ const NavBar = () => {
               <span style={{ paddingLeft: "10px" }}>cassoPi</span>
             </HomeLink>
           </Link>
-          <span>유명 예술가를 꿈꾸는 이들을 위하여</span>
+          <Subtitle>유명 예술가를 꿈꾸는 이들을 위하여</Subtitle>
           {/* <SearchForm onSubmit={onSearchSubmit}>
             <SearchInput placeholder="cassoPi에서 검색..." {...searchInput} />
             <SearchBtn>
@@ -316,9 +359,9 @@ const NavBar = () => {
                   <span>로그아웃</span>
                 </UserLi>
               </UserList>
-              <span style={{ marginLeft: "10px", fontSize: "1.2em" }}>
+              <KlayWord>
                 {userBalance}KLAY
-              </span>
+              </KlayWord>
             </UserContainer>
           ) : (
             <LoginBtn isLogin={isLogin} onClick={onLoginClick}>
