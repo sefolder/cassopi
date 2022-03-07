@@ -91,6 +91,10 @@ const Subtitle = styled.span`
 `
 
 const KlayWord = styled.span`
+  margin: 0;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
   margin-left: 10px;
   font-size: 1.2em;
   @media (max-width: 1080px) {
@@ -256,16 +260,21 @@ const UserLi = styled.li`
 `;
 
 const UserContainer = styled.div`
+  border-radius: 10px 10px 10px 10px;
+  background-color: lightgrey;
+  padding: 5px;
   position: relative;
   &:hover ${UserList} {
     visibility: visible;
     opacity: 1;
+    background-color: grey;
   }
 `;
 
 const UserIcon = styled.a`
   position: relative;
   font-size: 30px;
+  vertical-align: middle;
   color: rgba(0, 0, 0, 0.5);
   transition: color 0.1s ease-in-out;
   &:hover {
