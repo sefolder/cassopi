@@ -18,16 +18,20 @@ import { logout } from "../settings/slices/user";
 
 const Container = styled.div`
   width: 100%;
-  height: ${(props) => props.theme.navBarHeight};
+  height: ${(props) => props.theme.navBarHeight1};
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
 
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(65, 43, 43, 0.25);
   box-shadow: 0 3px 20px 0 rgba(31, 38, 135, 0.2);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+
+  @media (max-width: 1080px) {
+    height: ${(props) => props.theme.navBarHeight2};
+  }
 `;
 
 const InnerContainer = styled.div`
@@ -44,11 +48,13 @@ const InnerContainer = styled.div`
     width: 100%;
     margin: 0 auto;
     padding: 0 50px;
+    //height: 90%;
   }
   @media (max-width: 860px) {
     width: 100%;
-    margin: 0;
+    margin: 0 auto;
     padding: 0 20px;
+    //height: 70%;
   }
   /* @media (max-width: 480px) {
     width: 100%;
@@ -232,13 +238,11 @@ const UserList = styled.ul`
   visibility: hidden;
   opacity: 0;
   transition: all 0.1s ease-in-out;
+
 `;
 
 const UserLi = styled.li`
   margin: 0 auto;
-  width: 100%;
-  background-color: white;
-  transition: background-color 0.1s ease-in-out;
   a,
   span {
     display: block;
@@ -246,7 +250,6 @@ const UserLi = styled.li`
     padding: 7px 0;
     font-size: 15px;
     font-weight: 300;
-    text-align: center;
   }
   &:hover {
     cursor: pointer;

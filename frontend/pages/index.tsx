@@ -63,6 +63,16 @@ const NFT2Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(250px, auto);
   //background-color: #8592929e;
+
+  @media (max-width: 1080px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 600px) {
+    //grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const CardImage = styled(Image)`

@@ -8,6 +8,11 @@ import Title from "../../components/Title";
 const SideContainer = styled.div`
   width: 250px;
   position: fixed;
+
+  @media (max-width: 860px) {
+    width: 100%;
+    position: static;
+  }
 `;
 
 const SideH1 = styled.h1`
@@ -18,6 +23,10 @@ const SideH1 = styled.h1`
 
 const NFTsContainer = styled.div`
   margin-left: 270px;
+
+  @media (max-width: 860px) {
+    margin-left: 0;
+  }
 `;
 
 const Container = styled.div`
@@ -28,6 +37,10 @@ const Container = styled.div`
     font-size: 2rem;
     font-weight: bold;
   }
+
+  @media (max-width: 860px) {
+    display: block;
+  }
 `;
 
 const NFTContainer = styled.div`
@@ -35,6 +48,16 @@ const NFTContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: minmax(250px, auto);
   height: 100%;
+
+  @media (max-width: 1080px) {
+
+  }
+  @media (max-width: 860px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 interface Imetadata {

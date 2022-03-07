@@ -2,7 +2,8 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
-    navBarHeight: string;
+    navBarHeight1: string;
+    navBarHeight2: string;
     klipColor: string;
     mainColor: string;
     defaultBackgroundColor: string;

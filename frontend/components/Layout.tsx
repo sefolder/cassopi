@@ -10,7 +10,11 @@ import Footer from "./Footer";
 
 const Container = styled.div`
   width: 100%;
-  padding-top: ${(props) => props.theme.navBarHeight};
+  padding-top: ${(props) => props.theme.navBarHeight1};
+
+  @media (max-width: 1080px) {
+    padding-top: ${(props) => props.theme.navBarHeight2};
+  }
 `;
 
 const Content = styled.div`
