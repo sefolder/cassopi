@@ -16,7 +16,6 @@ import { logout } from "../settings/slices/user";
 // > 800 : tablet
 // > 480 : phone
 
-
 const Container = styled.div`
   width: 100%;
   height: ${(props) => props.theme.navBarHeight};
@@ -48,15 +47,14 @@ const InnerContainer = styled.div`
   }
   @media (max-width: 860px) {
     width: 100%;
-    margin: 0 auto;
-    padding: 0 50px;
+    margin: 0;
+    padding: 0 20px;
   }
   /* @media (max-width: 480px) {
     width: 100%;
     margin: 0 auto;
     padding: 0 50px;
   } */
-
 `;
 
 const NavBarLeft = styled.div`
@@ -83,23 +81,20 @@ const TempLogo = styled.div`
 const Subtitle = styled.span`
   visibility: visible;
   @media (max-width: 1080px) {
-
   }
   @media (max-width: 860px) {
     visibility: hidden;
   }
-`
+`;
 
 const KlayWord = styled.span`
   margin-left: 10px;
   font-size: 1.2em;
-  @media (max-width: 1080px) {
-    font-size: 1em;
-  }
   @media (max-width: 860px) {
-    
+    font-size: 1em;
+    display: none;
   }
-`
+`;
 
 const HomeLink = styled.a`
   height: inherit;
@@ -322,10 +317,9 @@ const NavBar = () => {
               <Image src={searchIcon} alt="search" />
             </SearchBtn>
           </SearchForm> */}
-          
         </NavBarLeft>
         <NavBarRight>
-        <NavList>
+          <NavList>
             {navList.map(({ id, pathname, name }) => (
               <NavLi key={id}>
                 <Link passHref href={pathname}>
@@ -359,9 +353,7 @@ const NavBar = () => {
                   <span>로그아웃</span>
                 </UserLi>
               </UserList>
-              <KlayWord>
-                {userBalance}KLAY
-              </KlayWord>
+              <KlayWord>{userBalance}KLAY</KlayWord>
             </UserContainer>
           ) : (
             <LoginBtn isLogin={isLogin} onClick={onLoginClick}>

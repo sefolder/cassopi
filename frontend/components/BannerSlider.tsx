@@ -4,11 +4,18 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import * as ga from '../lib/gtag';
+import * as ga from "../lib/gtag";
 
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 30px;
+  @media screen and (max-width: 1080px) {
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 860px) {
+    margin-bottom: 15px;
+  }
 `;
 
 const Container = styled.div`
@@ -36,32 +43,31 @@ const PrevButton = styled.button`
 `;
 
 const BannerSlider = () => {
-
   const freeKlayBannerClick = () => {
     ga.event({
       action: "banner click",
       category: "banner",
       label: "freeklay",
       value: "",
-    })
+    });
     console.log("free klay banner clicked");
-  }
+  };
   const homeBannerClick = () => {
     ga.event({
       action: "banner click",
       category: "banner",
       label: "home",
       value: "",
-    })
-  }
+    });
+  };
   const designerBannerClick = () => {
     ga.event({
       action: "banner click",
       category: "banner",
       label: "designer",
       value: "",
-    })
-  }
+    });
+  };
 
   const TOTAL_SLIDES = 3; //0 ~ 2
   const [currentSlide, setCurrentSlide] = useState(0);

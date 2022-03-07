@@ -29,6 +29,15 @@ const Banner = styled.img`
 const Bigtxt = styled.div`
   font-size: 40px;
   font-weight: bold;
+  margin-bottom: 20px;
+  @media screen and (max-width: 1080px) {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  @media screen and (max-width: 860px) {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
 `;
 
 const Square = styled.div`
@@ -122,8 +131,7 @@ const Home: NextPage = () => {
           <Banner src={BannerURL} />
         </a>
       </BannerContainer> */}
-      <br />
-      <br />
+
       {/* <Bigtxt>이번 달 신인 인기 작품</Bigtxt> <br />
       <NFT1Container>
         <Square
@@ -217,9 +225,7 @@ const Home: NextPage = () => {
         </Square>
       </NFT1Container>
       <br /> */}
-      <br />
-      <br />
-      <Bigtxt>최근 올라온 NFT</Bigtxt> <br />
+      <Bigtxt>최근 올라온 NFT</Bigtxt>
       <NFT2Container>
         {nfts2
           .slice(0)

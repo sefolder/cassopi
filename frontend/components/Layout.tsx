@@ -24,6 +24,14 @@ const Center = styled.div`
   height: max-content;
   margin: 0 auto;
   padding: 20px 10px;
+
+  @media screen and (max-width: 1080px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+  }
 `;
 
 export default function Layout({ children }: { children: React.ReactNode }) {

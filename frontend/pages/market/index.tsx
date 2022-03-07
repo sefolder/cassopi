@@ -21,6 +21,8 @@ const NFTsContainer = styled.div`
 `;
 
 const Container = styled.div`
+  width: 100%;
+
   h1 {
     margin-top: 20px;
     font-size: 2rem;

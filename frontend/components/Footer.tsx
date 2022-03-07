@@ -10,6 +10,13 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media screen and (max-width: 1080px) {
+    padding: 30px 50px;
+  }
+  @media screen and (max-width: 860px) {
+    padding: 20px 15px;
+    height: 100px;
+  }
 `;
 
 const Links = styled.ul`
@@ -35,12 +42,27 @@ const InfoText = styled.span`
   strong {
     font-size: 15px;
   }
+
+  @media screen and (max-width: 1080px) {
+  }
+  @media screen and (max-width: 860px) {
+    font-size: 12px;
+    line-height: 15px;
+    strong {
+      font-size: 13px;
+    }
+  }
 `;
 
 const CopyText = styled.span`
   font-size: 13px;
   font-weight: 300;
   color: white;
+  @media screen and (max-width: 1080px) {
+  }
+  @media screen and (max-width: 860px) {
+    font-size: 10px;
+  }
 `;
 
 const Footer = () => (
