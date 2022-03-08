@@ -33,6 +33,9 @@ const NextButton = styled.button`
   border: none;
   background-color: transparent;
   font-size: 70px;
+  @media (max-width: 860px) {
+    font-size: 40px;
+  }
 `;
 
 const PrevButton = styled.button`
@@ -40,6 +43,9 @@ const PrevButton = styled.button`
   border: none;
   background-color: transparent;
   font-size: 70px;
+  @media (max-width: 860px) {
+    font-size: 40px;
+  }
 `;
 
 const BannerSlider = () => {

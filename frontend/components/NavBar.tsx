@@ -191,6 +191,10 @@ const NavBtn = styled.a<{ isCurrent: boolean }>`
   &:hover {
     color: black;
   }
+
+  @media (max-width: 860px) {
+    font-size: 14px;
+  }
 `;
 
 const LoginBtn = styled.button<{ isLogin: boolean }>`
@@ -217,6 +221,10 @@ const LoginBtn = styled.button<{ isLogin: boolean }>`
     font-size: 12px;
     font-weight: 400;
     font-family: "Noto Sans KR", sans-serif;
+  }
+
+  @media (max-width: 860px) {
+    width: 80px;
   }
 `;
 

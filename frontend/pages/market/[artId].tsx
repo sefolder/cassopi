@@ -23,12 +23,21 @@ const TextWrapper = styled.div`
   justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 200px;
+
+  @media (max-width: 860px) {
+    flex-direction: column;
+    margin: 30px;
+  }
 `;
 
 const NFTContainer = styled.div`
   min-height: 500px;
   position: relative;
   cursor: pointer;
+
+  @media (max-width: 1080px) {
+    min-width: 90vw;
+  }
 `;
 
 const PriceContainer = styled.div`
@@ -55,6 +64,10 @@ const PriceContainer = styled.div`
     padding: 10px;
     width: 100%;
     cursor: pointer;
+  }
+
+  @media (max-width: 860px) {
+    margin-top: 30px;
   }
 `;
 

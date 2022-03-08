@@ -75,6 +75,11 @@ const NFT2Container = styled.div`
   }
 `;
 
+const Text = styled.div`
+  color: gray;
+  margin: 30px;
+`;
+
 const CardImage = styled(Image)`
   border-radius: 10px;
 `;
@@ -107,7 +112,7 @@ const Home: NextPage = () => {
   //최근 올라온 NFT 리스트
   const [nfts2, setNfts2] = useState<Infts[]>([
     {
-      id: 1,
+      id: 0,
       image: "",
       metadata: {
         name: "",
@@ -241,10 +246,16 @@ const Home: NextPage = () => {
           .slice(0)
           .reverse()
           .map(
-            (nft, index) =>
-              nft.image.length > 0 && (
-                <NFTCard key={`NFT${nft.id}`} price={3} nftInfo={nft}></NFTCard>
+            (nft, index) => {
+              if (nft.id === 0) {
+                return <Text>NFT를 불러오고 있습니다.</Text>
+              }
+              return (
+                nft.image.length > 0 && (
+                  <NFTCard key={`NFT${nft.id}`} price={3} nftInfo={nft}></NFTCard>
+                )
               )
+            }
           )}
       </NFT2Container>
     </>

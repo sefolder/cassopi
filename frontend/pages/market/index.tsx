@@ -60,6 +60,11 @@ const NFTContainer = styled.div`
   }
 `;
 
+const Text = styled.div`
+  color: gray;
+  margin: 30px;
+`;
+
 interface Imetadata {
   name: string;
   description: string;
@@ -108,10 +113,16 @@ const Market: NextPage = () => {
       <NFTsContainer>
         <NFTContainer>
           {nfts.map(
-            (nft, index) =>
-              nft.image.length > 0 && (
-                <NFTCard key={`NFT${nft.id}`} price={3} nftInfo={nft}></NFTCard>
+            (nft, index) => {
+              if (nft.id === 0) {
+                return <Text>NFT를 불러오고 있습니다.</Text>
+              }
+              return (
+                nft.image.length > 0 && (
+                  <NFTCard key={`NFT${nft.id}`} price={3} nftInfo={nft}></NFTCard>
+                )
               )
+            }
           )}
         </NFTContainer>
       </NFTsContainer>
