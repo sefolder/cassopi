@@ -153,6 +153,10 @@ const UserCollection: NextPage = () => {
       setUsername("whybe");
     else if (userAddress === "0x1dC2d87790b33464d0FaEcD5d1a9f50E58fb8790")
       setUsername("seongwon");
+    else if (userAddress === "0x6Bb4f5B5bf8E1edf40C64f789650369FFE7c9B21")
+      setUsername("sky");
+    else if (userAddress === "0x176071097C7D387fd99F56Afab54863BB3Ad44AF")
+      setUsername("yuza");
     else setUsername("사용자");
   }, [userAddress]);
 
