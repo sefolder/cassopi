@@ -178,7 +178,7 @@ const Art: NextPage = () => {
         else if (_seller === "0x1dC2d87790b33464d0FaEcD5d1a9f50E58fb8790")
           setSeller("seongwon");
         else if (_seller === "0x6Bb4f5B5bf8E1edf40C64f789650369FFE7c9B21")
-          setSeller("sky");
+          setSeller("fly");
         else if (_seller === "0x176071097C7D387fd99F56Afab54863BB3Ad44AF")
           setSeller("yuza");
       }
