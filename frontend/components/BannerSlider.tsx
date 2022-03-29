@@ -24,7 +24,7 @@ const Container = styled.div`
 `;
 
 const SliderContainer = styled.div`
-  width: 400%;
+  width: 200%;
   display: flex;
 `;
 
@@ -75,7 +75,7 @@ const BannerSlider = () => {
     });
   };
 
-  const TOTAL_SLIDES = 3; //0 ~ 2
+  const TOTAL_SLIDES = 1; //0 ~ 2
   const [currentSlide, setCurrentSlide] = useState(0);
   let slideRef = useRef<any>();
 
@@ -92,7 +92,7 @@ const BannerSlider = () => {
   useEffect(() => {
     slideRef.current.style.transition = "all 0.5s ease-in-out";
     slideRef.current.style.transform = `translateX(-${
-      (currentSlide / 4) * 100
+      (currentSlide / 2) * 100
     }%)`;
   }, [currentSlide]);
 
@@ -109,7 +109,7 @@ const BannerSlider = () => {
             width={1200}
             height={650}
           />
-          <a
+          {/* <a
             id="serviceopen_banner"
             href="https://forms.gle/wrKpeSLqEtb6txRv7"
             target="_blank"
@@ -135,7 +135,7 @@ const BannerSlider = () => {
               width={1200}
               height={650}
             />
-          </a>
+          </a> */}
           <a
             href="https://forms.gle/hSvDZk2jmDKWRQ5V9"
             target="_blank"
